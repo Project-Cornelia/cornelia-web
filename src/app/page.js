@@ -2,7 +2,6 @@
 // Original homepage content is preserved below for Phase 1 restoration
 // To restore, set NEXT_PUBLIC_MAINTENANCE_MODE="false" in .env.local
 
-/*
 'use client'
 
 import Link from 'next/link'
@@ -44,12 +43,9 @@ export default function Home() {
     { image: '/images/collaborator6.png', name: 'Partner 6' },
   ]
 
-  const mouseParallax =
-    typeof window === 'undefined'
-      ? {}
-      : {
-          transform: `translate3d(${((mouse.x - window.innerWidth / 2) || 0) * 0.01}px, ${((mouse.y - window.innerHeight / 2) || 0) * 0.01}px, 0)`,
-        }
+  const mouseParallax = {
+    transform: `translate3d(${((mouse.x - window.innerWidth / 2) || 0) * 0.01}px, ${((mouse.y - window.innerHeight / 2) || 0) * 0.01}px, 0)`,
+  }
 
   return (
     <>
@@ -303,11 +299,4 @@ export default function Home() {
       <Footer />
     </>
   )
-}
-*/
-
-// Phase 0: Maintenance Mode Active
-// All routes redirect to maintenance page via middleware
-export default function Home() {
-  return null
 }
