@@ -1,6 +1,6 @@
 # Project Cornelia Website - Complete Next.js Implementation
 
-A modern, responsive website for Project Cornelia AINA Foundation built with Next.js 14, React 18, and Tailwind CSS.
+A modern, responsive website for Project Cornelia AINA Foundation built with Next.js 14, React 18, and Tailwind CSS!
 
 ## 🌟 Features
 
