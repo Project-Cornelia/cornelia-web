@@ -12,10 +12,16 @@ import { useEffect, useState } from 'react'
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
+  const [mouseParallax, setMouseParallax] = useState({ transform: 'translate3d(0px, 0px, 0)' })
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
-    const handleMouse = (event) => setMouse({ x: event.clientX, y: event.clientY })
+    const handleMouse = (event) => {
+      setMouse({ x: event.clientX, y: event.clientY })
+      setMouseParallax({
+        transform: `translate3d(${((event.clientX - window.innerWidth / 2) || 0) * 0.01}px, ${((event.clientY - window.innerHeight / 2) || 0) * 0.01}px, 0)`,
+      })
+    }
 
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('mousemove', handleMouse)
@@ -42,10 +48,6 @@ export default function Home() {
     { image: '/images/collaborator5.png', name: 'Partner 5' },
     { image: '/images/collaborator6.png', name: 'Partner 6' },
   ]
-
-  const mouseParallax = {
-    transform: `translate3d(${((mouse.x - window.innerWidth / 2) || 0) * 0.01}px, ${((mouse.y - window.innerHeight / 2) || 0) * 0.01}px, 0)`,
-  }
 
   return (
     <>
