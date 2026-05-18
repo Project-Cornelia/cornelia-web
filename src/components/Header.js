@@ -26,6 +26,7 @@ export default function Header() {
                 src="/images/logo.png" 
                 alt="Cornelia Logo" 
                 className="h-10 w-auto"
+                loading="lazy"
               />
               <span className="hidden sm:inline text-sm font-bold text-gray-900">Cornelia</span>
             </Link>

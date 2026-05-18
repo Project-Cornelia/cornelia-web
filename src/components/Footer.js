@@ -27,6 +27,7 @@ export default function Footer() {
               src="/images/footer_logo.png" 
               alt="Cornelia Logo" 
               className="h-12 w-auto mb-4"
+              loading="lazy"
             />
             <p className="text-gray-600 text-sm">
               Making every woman's voice central to all conversations that matter.
@@ -115,6 +116,7 @@ export default function Footer() {
                   src="/images/instagram_icon.png" 
                   alt="Instagram" 
                   className="w-6 h-6"
+                  loading="lazy"
                 />
               </a>
               <a
@@ -128,6 +130,7 @@ export default function Footer() {
                   src="/images/linkedin_icon.png" 
                   alt="LinkedIn" 
                   className="w-6 h-6"
+                  loading="lazy"
                 />
               </a>
             </div>
