@@ -1,275 +1,90 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState(null)
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const toggleDropdown = (name) => {
-    setOpenDropdown(openDropdown === name ? null : name)
-  }
 
   return (
-    <header className="bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <img 
-                src="/images/logo.png" 
-                alt="Cornelia Logo" 
-                className="h-10 w-auto"
-              />
-              <span className="hidden sm:inline text-sm font-bold text-gray-900">Cornelia</span>
-            </Link>
+    <>
+      <style>{`
+        .glass-nav {
+          background: rgba(250, 249, 245, 0.85);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logo-container {
+          background-color: #f5f4f0;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          z-index: 10;
+        }
+
+        .nav-link {
+          transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+          color: #785249;
+        }
+
+        .sticky-nav-wrapper {
+          position: fixed;
+          top: 2rem;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          display: flex;
+          justify-content: center;
+          padding: 0 1rem;
+        }
+      `}</style>
+
+      <header className="sticky-nav-wrapper">
+        <nav className="flex items-center w-full max-w-6xl h-20 relative">
+          {/* Logo Section */}
+          <Link href="/" className="logo-container h-24 w-24 flex flex-col items-center justify-center rounded-2xl shrink-0 -mr-4">
+            <Image
+              src="/images/cornelia_logo.png"
+              alt="Cornelia Logo"
+              width={64}
+              height={64}
+              className="h-16 w-auto object-contain"
+              priority
+            />
+          </Link>
+
+          {/* Navigation Pill */}
+          <div className="glass-nav flex-grow h-16 rounded-tr-full rounded-br-full flex items-center justify-between px-8 shadow-sm">
+            {/* Navigation Links Group */}
+            <div className="hidden md:flex items-center space-x-12 ml-6">
+              <Link href="/" className="nav-link font-body-md text-on-surface text-lg">
+                Home
+              </Link>
+              <Link href="/about" className="nav-link font-body-md text-on-surface text-lg">
+                About
+              </Link>
+              <Link href="/resources" className="nav-link font-body-md text-on-surface text-lg">
+                Resources
+              </Link>
+              <Link href="/publications" className="nav-link font-body-md text-on-surface text-lg">
+                Publications
+              </Link>
+            </div>
+
+            {/* CTA Button */}
+            <div className="flex items-center">
+              <Link href="/contact" className="bg-primary text-surface font-body-md px-8 py-2.5 rounded-2xl hover:opacity-90 transition-all shadow-md active:scale-95 inline-block">
+                Get Involved
+              </Link>
+            </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-1">
-            <Link
-              href="/"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Home
-            </Link>
-
-            {/* About Dropdown */}
-            <div className="relative group">
-              <button className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors">
-                About
-              </button>
-              <div className="absolute left-0 mt-0 w-48 bg-white rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                <Link
-                  href="/about"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100 first:rounded-t last:rounded-b"
-                >
-                  About Us
-                </Link>
-                <Link
-                  href="/our-work"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100 last:rounded-b"
-                >
-                  Our Work
-                </Link>
-              </div>
-            </div>
-
-            <Link
-              href="/blog"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Blog
-            </Link>
-
-            {/* Get Involved Dropdown */}
-            <div className="relative group">
-              <button className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors">
-                Get Involved
-              </button>
-              <div className="absolute left-0 mt-0 w-48 bg-white rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                <a
-                  href="https://forms.gle/auEAXJ96GoRzLPmr9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100 first:rounded-t"
-                >
-                  Work with us
-                </a>
-                <a
-                  href="https://forms.gle/dx3ERQHoTLGF1pcx8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100 last:rounded-b"
-                >
-                  Write for us
-                </a>
-              </div>
-            </div>
-
-            <a
-              href="https://milaap.org/fundraisers/plc-ahaana-againstacid"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Donate
-            </a>
-
-            <Link
-              href="/members"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Members
-            </Link>
-
-            <Link
-              href="/initiatives"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Initiatives
-            </Link>
-
-            <Link
-              href="/resources"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Resources
-            </Link>
-
-            <Link
-              href="/contact"
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 transition-colors"
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100"
-          >
-            <svg
-              className="h-6 w-6"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <nav className="md:hidden pb-4">
-            <Link
-              href="/"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Home
-            </Link>
-
-            {/* About Mobile Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => toggleDropdown('about')}
-                className="w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-100 rounded flex justify-between items-center"
-              >
-                About
-                <span className={`transform transition-transform ${openDropdown === 'about' ? 'rotate-180' : ''}`}>
-                  ▼
-                </span>
-              </button>
-              {openDropdown === 'about' && (
-                <div className="pl-4">
-                  <Link
-                    href="/about"
-                    className="block px-3 py-2 text-sm hover:bg-gray-100 rounded"
-                  >
-                    About Us
-                  </Link>
-                  <Link
-                    href="/our-work"
-                    className="block px-3 py-2 text-sm hover:bg-gray-100 rounded"
-                  >
-                    Our Work
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <Link
-              href="/blog"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Blog
-            </Link>
-
-            {/* Get Involved Mobile Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => toggleDropdown('involved')}
-                className="w-full text-left px-3 py-2 text-base font-medium hover:bg-gray-100 rounded flex justify-between items-center"
-              >
-                Get Involved
-                <span className={`transform transition-transform ${openDropdown === 'involved' ? 'rotate-180' : ''}`}>
-                  ▼
-                </span>
-              </button>
-              {openDropdown === 'involved' && (
-                <div className="pl-4">
-                  <a
-                    href="https://forms.gle/auEAXJ96GoRzLPmr9"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-3 py-2 text-sm hover:bg-gray-100 rounded"
-                  >
-                    Work with us
-                  </a>
-                  <a
-                    href="https://forms.gle/dx3ERQHoTLGF1pcx8"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-3 py-2 text-sm hover:bg-gray-100 rounded"
-                  >
-                    Write for us
-                  </a>
-                </div>
-              )}
-            </div>
-
-            <a
-              href="https://milaap.org/fundraisers/plc-ahaana-againstacid"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Donate
-            </a>
-
-            <Link
-              href="/members"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Members
-            </Link>
-
-            <Link
-              href="/initiatives"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Initiatives
-            </Link>
-
-            <Link
-              href="/resources"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Resources
-            </Link>
-
-            <Link
-              href="/contact"
-              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded"
-            >
-              Contact
-            </Link>
-          </nav>
-        )}
-      </div>
-    </header>
+        </nav>
+      </header>
+    </>
   )
 }
+

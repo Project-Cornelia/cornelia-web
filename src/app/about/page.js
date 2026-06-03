@@ -1,98 +1,132 @@
 'use client'
 
+import Image from 'next/image'
 import Header from '@/components/Header'
+import AboutHeroSection from '@/components/AboutHeroSection'
 import Footer from '@/components/Footer'
-import Link from 'next/link'
 
 export default function About() {
   return (
     <>
       <Header />
-      <main>
-        {/* Page Header */}
-        <section className="bg-gray-100 py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
-            <p className="text-lg text-gray-600">
-              Learn more about Project Cornelia and our mission
-            </p>
-          </div>
-        </section>
-
-        {/* About Content */}
-        <section className="section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center text-gray-500 text-2xl">
-                  [About Image]
-                </div>
+      <main className="bg-surface overflow-x-hidden">
+        <AboutHeroSection />
+        
+        {/* Content Section */}
+        <section className="py-section-padding-mobile md:py-section-padding-desktop max-w-7xl mx-auto px-gutter">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
+            {/* Left: Map/Visual */}
+            <div className="relative group">
+              <div className="aspect-square bg-surface-container rounded-xl overflow-hidden border border-neutral-100">
+                <Image
+                  src="https://i.ibb.co/217NprcX/India-Cornelia.png"
+                  alt="Project Cornelia locations across India"
+                  fill
+                  className="object-cover"
+                />
               </div>
+            </div>
+
+            {/* Right: About Content */}
+            <div className="space-y-6">
               <div>
-                <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  Cornelia was founded in June 2021 as a student-led initiative, a pan Delhi University club. Ever since its inception as a club, it has always considered law and policy to be the most powerful tools of democracy.
+                <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">
+                  Our Mission
+                </h2>
+                <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                  Project Cornelia is dedicated to bringing women's voices to the forefront of democratic participation. We believe that women's leadership, research, and activism are fundamental to building just and equitable societies.
                 </p>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  The male dominance, however, has always prevented these tools from showcasing their true potential. We are thus determined to fight the 'man' in the State and include the inherently silenced voices in democratic discussions to bring about its true strength.
+                <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Through legal literacy, policy advocacy, and community organizing, we work to center women's experiences in conversations that shape our future.
                 </p>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  In the pursuit, we have so far worked with the youth, students and females in the form of awareness drives, workshops, fundraisers and so on. Our collective work is built on three pillars: Collective, Criticism, and Conversation.
-                </p>
+              </div>
+
+              <div>
+                <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">
+                  Our Focus Areas
+                </h3>
+                <ul className="space-y-2">
+                  {['Legal Empowerment', 'Policy Research', 'Community Building', 'Youth Leadership'].map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <span className="w-2 h-2 rounded-full bg-primary" />
+                      <span className="font-body-md text-on-surface">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Core Values */}
-        <section className="bg-gray-50 section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-12 text-center">Our Core Values</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-lg shadow-sm">
-                <h3 className="text-2xl font-bold mb-4">🤝 Collective</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We believe in the power of collective action. Together, we are stronger and more effective in creating lasting change.
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-sm">
-                <h3 className="text-2xl font-bold mb-4">💡 Criticism</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We embrace constructive criticism and critical thinking as essential tools for growth and improvement in our work.
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-sm">
-                <h3 className="text-2xl font-bold mb-4">💬 Conversation</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We foster open dialogue and conversations that bring women's voices to the center of democratic discussions.
-                </p>
-              </div>
+        {/* Values Section */}
+        <section className="py-section-padding-mobile md:py-section-padding-desktop bg-surface-container-low">
+          <div className="max-w-7xl mx-auto px-gutter">
+            <div className="mb-12">
+              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-2">
+                Our Values
+              </h2>
+              <p className="font-body-md text-on-surface-variant max-w-2xl">
+                Grounded in feminist principles and democratic ideals
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
+              {[
+                {
+                  title: 'Collective Power',
+                  description: 'We believe in the strength of women coming together to drive systemic change.',
+                },
+                {
+                  title: 'Accountability',
+                  description: 'We hold institutions accountable to women and marginalized communities.',
+                },
+                {
+                  title: 'Innovation',
+                  description: 'We employ new tools and strategies to amplify women\'s voices in policy.',
+                },
+              ].map((value) => (
+                <div
+                  key={value.title}
+                  className="p-6 bg-surface rounded-lg border border-neutral-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                >
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="font-body-md text-on-surface-variant leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="bg-black text-white section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Make a Difference?</h2>
-            <p className="text-lg mb-8 text-gray-300 max-w-2xl mx-auto">
-              Join us in our mission to amplify women's voices and create systemic change through law and policy.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/our-work"
-                className="px-6 py-3 bg-white text-black rounded hover:bg-gray-200 transition-colors font-semibold"
-              >
-                Explore Our Work
-              </Link>
-              <a
-                href="https://forms.gle/auEAXJ96GoRzLPmr9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 border-2 border-white text-white rounded hover:bg-white hover:text-black transition-colors font-semibold"
-              >
-                Work With Us
-              </a>
+        {/* Team/Contributors Section */}
+        <section className="py-section-padding-mobile md:py-section-padding-desktop">
+          <div className="max-w-7xl mx-auto px-gutter">
+            <div className="mb-12">
+              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-2">
+                Powered By Our Community
+              </h2>
+              <p className="font-body-md text-on-surface-variant max-w-2xl">
+                From lawyers to activists, researchers to organizers—women leading change
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-md">
+              {[
+                { label: 'Student Leaders', count: '100+' },
+                { label: 'Partner Organizations', count: '25+' },
+                { label: 'Legal Cases', count: '15+' },
+                { label: 'Policy Briefs', count: '30+' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="font-display-lg text-display-lg text-primary mb-2">
+                    {stat.count}
+                  </div>
+                  <p className="font-body-md text-on-surface-variant">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

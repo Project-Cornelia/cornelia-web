@@ -1,156 +1,164 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [subscribed, setSubscribed] = useState(false)
 
-  const handleSubscribe = (e) => {
+  const handleNewsletterSubmit = (e) => {
     e.preventDefault()
-    if (email) {
+    if (formData.email) {
       setSubscribed(true)
-      setEmail('')
+      setFormData({ ...formData, email: '' })
       setTimeout(() => setSubscribed(false), 3000)
     }
   }
 
+  const handleContactSubmit = (e) => {
+    e.preventDefault()
+    // Handle form submission
+    setFormData({ name: '', email: '', message: '' })
+  }
+
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {/* Brand */}
-          <div>
-            <img 
-              src="/images/footer_logo.png" 
-              alt="Cornelia Logo" 
-              className="h-12 w-auto mb-4"
-            />
-            <p className="text-gray-600 text-sm">
-              Making every woman's voice central to all conversations that matter.
-            </p>
+    <footer className="w-full bg-neutral-900 text-neutral-100 border-t border-on-secondary-fixed-variant">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-gutter py-12 md:py-16">
+        {/* Brand & Info */}
+        <div className="space-y-4">
+          <div className="font-headline-sm text-headline-sm font-bold text-neutral-100 flex items-center gap-3">
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1.5">
+              <Image
+                src="/images/cornelia_logo.png"
+                alt="Cornelia Logo"
+                width={32}
+                height={32}
+                className="h-6 w-auto object-contain"
+              />
+            </div>
+            Project Cornelia
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>
-                <Link href="/" className="hover:text-gray-900 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-gray-900 transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/our-work" className="hover:text-gray-900 transition-colors">
-                  Our Work
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-gray-900 transition-colors">
-                  Blog
-                </Link>
-              </li>
-            </ul>
+          <p className="font-body-sm text-body-sm text-neutral-100/70">
+            Empowering women and youth through law, policy, and democratic participation.
+          </p>
+          <div className="flex gap-5 pt-2">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
+              <span>𝕏</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
+              📷
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
+              in
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
+              f
+            </a>
           </div>
-
-          {/* Newsletter Signup */}
-          <div>
-            <h4 className="font-semibold mb-4">Subscribe to our emailing list</h4>
-            <form onSubmit={handleSubscribe} className="space-y-2">
+          <div className="pt-4">
+            <h4 className="font-label-lg mb-2">Join Our Newsletter:</h4>
+            <form onSubmit={handleNewsletterSubmit} className="flex border-b border-neutral-100/30">
               <input
                 type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="bg-transparent border-none focus:ring-0 w-full py-1 placeholder-neutral-100/30 text-sm"
+                placeholder="Email Address"
                 required
               />
-              <button
-                type="submit"
-                className="w-full px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors font-semibold"
-              >
-                Submit
+              <button type="submit" className="p-1 text-primary-fixed">
+                →
               </button>
-              {subscribed && (
-                <p className="text-green-600 text-xs">Thank you for subscribing!</p>
-              )}
             </form>
+            {subscribed && <p className="text-primary-fixed text-xs mt-2">Thanks for subscribing!</p>}
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-200 pt-8 mt-8">
-          {/* Contact and Social */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        {/* Links */}
+        <div className="md:pl-12">
+          <h4 className="font-headline-sm text-headline-sm mb-6">Navigation</h4>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <Link href="/" className="text-neutral-100 font-bold underline underline-offset-4">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Blogs
+              </Link>
+            </li>
+            <li>
+              <Link href="/resources" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Resources
+              </Link>
+            </li>
+            <li>
+              <Link href="/our-work" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Publications
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact Form */}
+        <div>
+          <h4 className="font-headline-sm text-headline-sm mb-6">Get in Touch</h4>
+          <form onSubmit={handleContactSubmit} className="space-y-4">
             <div>
-              <p className="text-sm text-gray-600 mb-2">
-                <strong>Contact us:</strong>
-              </p>
-              <a
-                href="mailto:contact@corneliafoundation.org"
-                className="text-sm text-gray-900 hover:text-gray-600 transition-colors"
-              >
-                contact@corneliafoundation.org
-              </a>
+              <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
+                Name:
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full bg-transparent border-none border-b border-on-secondary-fixed-variant focus:border-primary-fixed focus:ring-0 transition-colors py-1 text-sm text-neutral-100"
+              />
             </div>
-
-            {/* Social Links */}
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Follow us on -</span>
-              <a
-                href="https://www.instagram.com/project.cornelia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-                title="Instagram"
-              >
-                <img 
-                  src="/images/instagram_icon.png" 
-                  alt="Instagram" 
-                  className="w-6 h-6"
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/project-cornelia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-                title="LinkedIn"
-              >
-                <img 
-                  src="/images/linkedin_icon.png" 
-                  alt="LinkedIn" 
-                  className="w-6 h-6"
-                />
-              </a>
+            <div>
+              <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
+                Email:
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full bg-transparent border-none border-b border-on-secondary-fixed-variant focus:border-primary-fixed focus:ring-0 transition-colors py-1 text-sm text-neutral-100"
+              />
             </div>
-          </div>
+            <div>
+              <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
+                Message:
+              </label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                rows="1"
+                className="w-full bg-transparent border-none border-b border-on-secondary-fixed-variant focus:border-primary-fixed focus:ring-0 transition-colors py-1 text-sm text-neutral-100 resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-neutral-100 text-neutral-900 px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-primary-fixed transition-colors"
+            >
+              Submit
+            </button>
+          </form>
         </div>
+      </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-200 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-            <p>&copy; 2024 Project Cornelia AINA Foundation. All rights reserved.</p>
-            <div className="flex gap-6 text-sm text-gray-600">
-              <a href="/privacy" className="hover:text-gray-900 transition-colors">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="hover:text-gray-900 transition-colors">
-                Terms of Service
-              </a>
-              <a href="/contact" className="hover:text-gray-900 transition-colors">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
+      <div className="max-w-7xl mx-auto px-gutter py-6 border-t border-on-secondary-fixed-variant/20 text-center md:text-left">
+        <p className="font-body-sm text-body-sm text-neutral-100/50">
+          © 2026 Project Cornelia. All rights reserved.
+        </p>
       </div>
     </footer>
   )
