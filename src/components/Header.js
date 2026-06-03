@@ -48,7 +48,7 @@ export default function Header() {
           {/* Logo Section */}
           <Link href="/" className="logo-container h-24 w-24 flex flex-col items-center justify-center rounded-2xl shrink-0 -mr-4">
             <Image
-              src="/images/cornelia_logo.png"
+              src="/images/p_cornelia_logo.png"
               alt="Cornelia Logo"
               width={64}
               height={64}

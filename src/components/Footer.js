@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="font-headline-sm text-headline-sm font-bold text-neutral-100 flex items-center gap-3">
             <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1.5">
               <Image
-                src="/images/cornelia_logo.png"
+                src="/images/p_cornelia_logo.png"
                 alt="Cornelia Logo"
                 width={32}
                 height={32}
