@@ -1,4 +1,3 @@
-// Homepage with new design system components
 'use client'
 
 import Header from '@/components/Header'
