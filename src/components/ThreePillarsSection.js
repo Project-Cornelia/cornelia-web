@@ -31,7 +31,7 @@ export default function ThreePillarsSection() {
 
   return (
     <section className="py-section-padding-desktop bg-surface-container-low px-gutter">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
         {/* Interlocking Circles Graphic */}
         <div className={`relative aspect-square flex items-center justify-center reveal ${isVisible ? 'visible' : ''}`} ref={containerRef}>
           <svg className="w-full h-full max-w-[400px]" viewBox="0 0 400 400">

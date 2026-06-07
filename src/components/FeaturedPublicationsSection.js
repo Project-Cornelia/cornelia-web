@@ -50,7 +50,7 @@ export default function FeaturedPublicationsSection({ publications = [] }) {
           {teaser1 && (
             <Link href={`/publications/${teaser1.slug}`} className="flex-1">
               <div className="bg-surface-container-high border border-neutral-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group flex h-full">
-                <div className="w-1/3 relative overflow-hidden">
+                <div className="w-24 sm:w-1/3 shrink-0 relative overflow-hidden min-h-[120px]">
                   <Image
                     src={teaser1.image}
                     alt={teaser1.title}
@@ -59,7 +59,7 @@ export default function FeaturedPublicationsSection({ publications = [] }) {
                     style={{ filter: 'grayscale(1)' }}
                   />
                 </div>
-              <div className="w-2/3 p-stack-md flex flex-col justify-center">
+              <div className="flex-1 p-stack-md flex flex-col justify-center overflow-hidden">
                 <span className="text-primary font-label-md text-label-md mb-1 block uppercase tracking-wider text-[12px]">
                   {teaser1.category}
                 </span>
@@ -78,7 +78,7 @@ export default function FeaturedPublicationsSection({ publications = [] }) {
           {teaser2 && (
             <Link href={`/publications/${teaser2.slug}`} className="flex-1">
               <div className="bg-surface-container-high border border-neutral-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group flex h-full">
-                <div className="w-1/3 relative overflow-hidden">
+                <div className="w-24 sm:w-1/3 shrink-0 relative overflow-hidden min-h-[120px]">
                   <Image
                     src={teaser2.image}
                     alt={teaser2.title}
@@ -87,7 +87,7 @@ export default function FeaturedPublicationsSection({ publications = [] }) {
                     style={{ filter: 'grayscale(1)' }}
                   />
                 </div>
-                <div className="w-2/3 p-stack-md flex flex-col justify-center">
+                <div className="flex-1 p-stack-md flex flex-col justify-center overflow-hidden">
                   <span className="text-primary font-label-md text-label-md mb-1 block uppercase tracking-wider text-[12px]">
                     {teaser2.category}
                   </span>

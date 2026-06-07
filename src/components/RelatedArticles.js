@@ -37,7 +37,7 @@ export default function RelatedArticles({ articles }) {
           <Link
             key={article.id}
             href={article.slug || '#'}
-            className="group grid grid-cols-1 md:grid-cols-[400px_1fr] gap-12 items-start"
+            className="group grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-8 md:gap-12 items-start"
           >
             <div className="aspect-[4/3] bg-surface-container overflow-hidden">
               <Image
@@ -49,7 +49,7 @@ export default function RelatedArticles({ articles }) {
               />
             </div>
             <div className="flex flex-col h-full py-2">
-              <h3 className="font-headline-md text-4xl text-on-surface mb-6 group-hover:text-primary transition-colors">
+              <h3 className="font-headline-md text-headline-sm md:text-headline-md text-on-surface mb-6 group-hover:text-primary transition-colors">
                 {article.title}
               </h3>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">

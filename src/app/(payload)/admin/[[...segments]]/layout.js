@@ -1,12 +1,16 @@
 import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts'
-import config from '@/payload.config'
+import config from '@/payload.config.js'
 import { importMap } from '../importMap'
 import '@payloadcms/next/css'
 
 async function serverFunction(args) {
   'use server'
 
-  return handleServerFunctions(args)
+  return handleServerFunctions({
+    ...args,
+    config,
+    importMap,
+  })
 }
 
 export default async function Layout(props) {

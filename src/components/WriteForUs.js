@@ -19,7 +19,7 @@ export default function WriteForUs() {
           href="https://forms.gle/dx3ERQHoTLGF1pcx8"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 transition-all duration-300 active:scale-95 shadow-md"
+          className="inline-block w-full sm:w-auto px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 transition-all duration-300 active:scale-95 shadow-md"
         >
           Submit Your Article
         </a>

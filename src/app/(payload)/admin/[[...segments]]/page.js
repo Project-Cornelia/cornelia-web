@@ -1,6 +1,8 @@
 import { RootPage } from '@payloadcms/next/views'
-import config from '@/payload.config'
+import config from '@/payload.config.js'
 import { importMap } from '../importMap'
+
+export const dynamic = 'force-dynamic'
 
 export default async function Page(props) {
   const params = await props.params

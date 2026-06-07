@@ -44,7 +44,8 @@ export default function TimelineSection() {
 
         <div className="relative mt-12 pb-8" ref={containerRef}>
           <div className="overflow-x-auto hide-scrollbar">
-            <div className="relative flex min-w-[1200px] pb-12 pt-16">
+            <div className="md:hidden text-center text-on-surface-variant/50 text-sm mb-4 italic">← Scroll to explore →</div>
+            <div className="relative flex min-w-[640px] md:min-w-0 pb-12 pt-16">
               {/* The Continuous Horizontal Line */}
               <div className="absolute top-[calc(4rem+2px)] left-0 w-full h-[1px] bg-secondary-fixed-dim/50 z-0"></div>
 

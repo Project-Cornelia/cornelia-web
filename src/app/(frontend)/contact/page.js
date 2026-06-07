@@ -5,29 +5,19 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-
     try {
-      // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1000))
       setSubmitted(true)
       setFormData({ name: '', email: '', subject: '', message: '' })
@@ -39,213 +29,138 @@ export default function Contact() {
     }
   }
 
+  const inputClass = 'w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors'
+
   return (
     <>
       <Header />
-      <main>
+      <main className="bg-surface overflow-x-hidden">
         {/* Page Header */}
-        <section className="bg-gray-100 py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h1>
-            <p className="text-lg text-gray-600">
+        <section className="bg-surface-container-low pt-40 pb-12 px-gutter">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4">
+              Get In Touch
+            </h1>
+            <p className="font-body-md text-body-md text-on-surface-variant">
               Have questions or want to collaborate? We'd love to hear from you.
             </p>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section className="section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {/* Contact Info */}
-              <div>
-                <h2 className="text-3xl font-bold mb-8">Contact Information</h2>
+        <section className="py-section-padding-mobile md:py-section-padding-desktop px-gutter">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            {/* Contact Info */}
+            <div>
+              <h2 className="font-headline-sm text-headline-sm text-on-surface mb-8">Contact Information</h2>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-label-lg text-label-lg text-primary uppercase tracking-widest mb-2">Email</h3>
+                  <a
+                    href="mailto:contact.projectcornelia@gmail.com"
+                    className="font-body-md text-body-md text-on-surface hover:text-primary transition-colors"
+                  >
+                    contact.projectcornelia@gmail.com
+                  </a>
+                </div>
 
-                <div className="space-y-8">
-                  {/* Email */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Email</h3>
+                <div>
+                  <h3 className="font-label-lg text-label-lg text-primary uppercase tracking-widest mb-2">Location</h3>
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    Delhi University<br />New Delhi, India
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-label-lg text-label-lg text-primary uppercase tracking-widest mb-3">Follow Us</h3>
+                  <div className="flex gap-6">
                     <a
-                      href="mailto:contact@corneliafoundation.org"
-                      className="text-lg text-gray-600 hover:text-gray-900 transition-colors"
+                      href="https://www.instagram.com/project.cornelia/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body-md text-on-surface-variant hover:text-primary transition-colors"
                     >
-                      contact@corneliafoundation.org
+                      Instagram
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/company/project-cornelia/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    >
+                      LinkedIn
                     </a>
                   </div>
+                </div>
 
-                  {/* Location */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Location</h3>
-                    <p className="text-gray-600">
-                      Delhi University<br />
-                      New Delhi, India
-                    </p>
-                  </div>
-
-                  {/* Social Media */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
-                    <div className="flex space-x-6">
-                      <a
-                        href="https://www.instagram.com/project.cornelia/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-gray-900 transition-colors text-lg"
-                      >
-                        Instagram
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/company/project-cornelia/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-gray-900 transition-colors text-lg"
-                      >
-                        LinkedIn
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Response Time */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                    <h3 className="text-lg font-semibold mb-2 text-blue-900">Response Time</h3>
-                    <p className="text-blue-800">
-                      We typically respond to inquiries within 2-3 business days. Thank you for your patience!
-                    </p>
-                  </div>
+                <div className="bg-surface-container border border-neutral-100 rounded-xl p-6">
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">Response Time</h3>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant">
+                    We typically respond within 2–3 business days.
+                  </p>
                 </div>
               </div>
+            </div>
 
-              {/* Contact Form */}
-              <div>
-                <h2 className="text-3xl font-bold mb-8">Send us a Message</h2>
+            {/* Contact Form */}
+            <div>
+              <h2 className="font-headline-sm text-headline-sm text-on-surface mb-8">Send us a Message</h2>
 
-                {submitted && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-green-800 font-semibold">
-                      ✓ Thank you! Your message has been sent successfully.
-                    </p>
-                    <p className="text-green-700 text-sm mt-1">
-                      We'll get back to you as soon as possible.
-                    </p>
-                  </div>
-                )}
+              {submitted && (
+                <div className="mb-6 p-4 bg-surface-container border border-primary/30 rounded-xl">
+                  <p className="font-body-sm text-body-sm text-primary font-semibold">
+                    ✓ Message sent! We'll be in touch soon.
+                  </p>
+                </div>
+              )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name */}
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  {/* Subject */}
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-semibold mb-2">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                      placeholder="What is this about?"
-                    />
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-semibold mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows="5"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent resize-none"
-                      placeholder="Your message..."
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 disabled:bg-gray-400 transition-colors"
-                  >
-                    {loading ? 'Sending...' : 'Send Message'}
-                  </button>
-                </form>
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Full Name</label>
+                  <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className={inputClass} placeholder="Your name" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Email Address</label>
+                  <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className={inputClass} placeholder="your@email.com" />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Subject</label>
+                  <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleChange} required className={inputClass} placeholder="What is this about?" />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Message</label>
+                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows="5" className={`${inputClass} resize-none`} placeholder="Your message..." />
+                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 disabled:opacity-50 transition-all active:scale-95 shadow-md"
+                >
+                  {loading ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="bg-gray-50 section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="bg-white p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">How can I get involved?</h3>
-                <p className="text-gray-600">
-                  You can fill out our "Work with us" form on the Get Involved page to explore collaboration opportunities.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">How can I contribute financially?</h3>
-                <p className="text-gray-600">
-                  You can donate through our Milaap fundraiser page which supports acid attack survivors.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">Can I write for your blog?</h3>
-                <p className="text-gray-600">
-                  Yes! Fill out our "Write for us" form and share your insights on women, law, and policy.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3">How often do you respond?</h3>
-                <p className="text-gray-600">
-                  We aim to respond to all inquiries within 2-3 business days. Thank you for your patience!
-                </p>
-              </div>
+        <section className="py-section-padding-mobile md:py-section-padding-desktop bg-surface-container-low px-gutter">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="font-headline-lg text-headline-sm md:text-headline-md text-on-surface mb-12 text-center">
+              Frequently Asked Questions
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md max-w-4xl mx-auto">
+              {[
+                { q: 'How can I get involved?', a: 'Fill out our "Work with us" form on the Get Involved page to explore collaboration opportunities.' },
+                { q: 'How can I contribute financially?', a: 'Donate through our Milaap fundraiser page which supports acid attack survivors.' },
+                { q: 'Can I write for your blog?', a: 'Yes! Fill out our "Write for us" form and share your insights on women, law, and policy.' },
+                { q: 'How often do you respond?', a: 'We aim to respond to all inquiries within 2–3 business days.' },
+              ].map(({ q, a }) => (
+                <div key={q} className="bg-surface border border-neutral-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface mb-3">{q}</h3>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{a}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

@@ -12,7 +12,7 @@ export default function ArticleContent({ imageUrl, children, content }) {
           alt="Article content"
           width={1400}
           height={700}
-          className="w-full h-auto object-cover max-h-[80vh]"
+          className="w-full h-auto object-cover max-h-[40vh] md:max-h-[80vh]"
         />
       </div>
 

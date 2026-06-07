@@ -1,111 +1,105 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 export default function PublicationsSection() {
-  const containerRef = useRef(null)
+  const headerRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [publications, setPublications] = useState([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
       { threshold: 0.1 }
     )
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
+    if (headerRef.current) observer.observe(headerRef.current)
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    fetch('/data/publications.json')
+      .then((r) => r.json())
+      .then((data) => setPublications(data.slice(0, 3)))
+      .catch(() => {})
   }, [])
 
   return (
     <section className="py-section-padding-desktop bg-surface px-gutter">
-      <div className="max-w-7xl mx-auto" ref={containerRef}>
-        <h2 className="font-display-lg text-display-lg text-on-surface mb-stack-lg">
-          Publications
-        </h2>
+      <div className="max-w-7xl mx-auto">
+        <div
+          ref={headerRef}
+          className={`flex items-end justify-between mb-stack-lg reveal ${isVisible ? 'visible' : ''}`}
+        >
+          <h2 className="font-display-lg text-headline-md md:text-display-lg text-on-surface">
+            Publications
+          </h2>
+          <Link
+            href="/publications"
+            className="font-label-lg text-label-lg text-primary hover:opacity-70 transition-opacity hidden sm:flex items-center gap-1"
+          >
+            View all
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
 
-        {/* Asymmetric Mosaic */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          {/* Large Featured Card */}
-          <div className={`md:col-span-7 group relative bg-primary-container/20 rounded-lg p-8 border border-neutral-100 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 reveal ${isVisible ? 'visible' : ''}`}>
-            <div className="aspect-[16/10] bg-surface-container-highest rounded-lg mb-8 overflow-hidden relative">
-              <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-5qh9e39RlNJd8h-AIowfrKY1SkuniKem5Cdevhw68VZQhibqQKJovN1zIP_bzcQKjl-xl5VXnD9LKK5UNioAOb0JIoO7IIZFirq47HqdaJkmNKE-3pkeXPTq_QTy0Wu4zYtmlzde1K4p0y45TIYRkpq7ZcGCk29HytRiqTfajhtSlwvZlIGE-pG78k_C4OQ8jx2zqF98ruUgDNKD4_89NH4KSvR85DMg4NhnTdHtL65JqARdDoc8pHJXVkXpwq6LfixK2rpaF-o"
-                alt="Publication cover"
-                fill
-                className="object-cover grayscale"
-              />
-            </div>
-            <h3 className="font-headline-md text-headline-md text-on-surface mb-4">
-              Today in Total
-            </h3>
-            <p className="font-body-md text-body-md text-on-surface-variant mb-6">
-              Here, the contents of the articles are displayed. Today in total are the significant changes made....
-            </p>
-            <a className="font-label-lg text-label-lg text-primary uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all" href="#">
-              Read more →
-            </a>
+        {publications.length > 0 && (
+          <div className="flex flex-col gap-stack-lg">
+            {publications.map((pub) => (
+              <Link key={pub.id} href={`/publications/${pub.slug}`}>
+                <article className="grid grid-cols-1 md:grid-cols-12 gap-stack-md group cursor-pointer border-b border-neutral-100 pb-stack-lg">
+                  <div className="md:col-span-4 relative overflow-hidden bg-surface-variant h-56 md:h-64">
+                    <Image
+                      src={pub.image}
+                      alt={pub.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-all duration-500"
+                      style={{ filter: 'grayscale(1)' }}
+                    />
+                  </div>
+                  <div className="md:col-span-8 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-primary font-bold text-[10px] uppercase tracking-[0.2em]">
+                        {pub.category}
+                      </span>
+                      <span className="text-on-surface-variant text-[10px] uppercase tracking-[0.2em]">
+                        {pub.date}
+                      </span>
+                    </div>
+                    <h3 className="font-headline-sm text-headline-sm text-on-surface mb-stack-sm group-hover:text-primary transition-colors">
+                      {pub.title}
+                    </h3>
+                    <p className="font-body-sm text-body-sm text-on-surface-variant mb-stack-md leading-relaxed">
+                      {pub.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2 text-primary font-label-lg text-label-lg">
+                      Read full article
+                      <svg
+                        className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
+        )}
 
-          {/* Two Smaller Stacked Cards */}
-          <div className="md:col-span-5 flex flex-col gap-gutter">
-            {/* Small Card 1 */}
-            <div className={`group relative bg-primary/10 rounded-lg p-6 border border-neutral-100 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 reveal ${isVisible ? 'visible' : ''}`}>
-              <div className="flex gap-6 items-center">
-                <div className="w-32 h-32 flex-shrink-0 bg-surface-container-highest rounded-lg overflow-hidden relative">
-                  <Image
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUaNWAwmPd3GrrpLHpUeMKwr3YkbsZc7leidUsqpG4LBoq6dKSNrp6kGKPcAYhSXmEZ5OJ8AEl_m91dH7Bu1QA_joasDG2td-U1ut5XsoRg-3lYi_GBDfCnzHGiiIaGCs0OQHYgXr2CmsO8U-QzVivK4P7OmSbc1VD0DD9eOPF2nebBsTCdKglKSdqEpKI0sZTjMkYbnYF-6DCiqciDJtjeprMIb8zcTs-kjmGFsy9bBYsf3lrqff4r9oM50XLHZiS77KhUbGly8E"
-                    alt="Research thumbnail"
-                    fill
-                    className="object-cover grayscale"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">
-                    Today in Total
-                  </h3>
-                  <p className="font-body-sm text-body-sm text-on-surface-variant mb-4">
-                    Here, the contents of the articles are displayed.
-                  </p>
-                  <a className="font-label-md text-label-md text-primary hover:underline" href="#">
-                    Read more →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Small Card 2 */}
-            <div className={`group relative bg-primary/10 rounded-lg p-6 border border-neutral-100 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 reveal ${isVisible ? 'visible' : ''}`}>
-              <div className="flex gap-6 items-center">
-                <div className="w-32 h-32 flex-shrink-0 bg-surface-container-highest rounded-lg overflow-hidden relative">
-                  <Image
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt4IYnuoZxLBxA-YkuUmDs5cOdK9htnFyxudCHC8LCfLJ2HCsTeePUdYbGt846RsBnKL5D7n6mPATeYpJx0g2LpcO-_xO4hZJrlhNfeh1-OFdK14f_EO56jb8FaiDLzS7kswZuqDV_qp1EyeGiQmz4SJaWElLgjFcIZQYKIBhUMtmOo6PYBJtmYy-HvR9sg6E3d9X74kfP3_Qimhb5uRQSc5EGomHa7kTE6g3o5KN-epDNl9rI7QLp6ItfotxgpAvBvIqsXgEQlfU"
-                    alt="Archive thumbnail"
-                    fill
-                    className="object-cover grayscale"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">
-                    Today in Total
-                  </h3>
-                  <p className="font-body-sm text-body-sm text-on-surface-variant mb-4">
-                    Here, the contents of the articles are displayed.
-                  </p>
-                  <a className="font-label-md text-label-md text-primary hover:underline" href="#">
-                    Read more →
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="mt-stack-lg flex justify-center sm:hidden">
+          <Link
+            href="/publications"
+            className="font-label-lg text-label-lg text-primary border border-primary px-6 py-2.5 rounded-full hover:bg-primary hover:text-surface transition-all"
+          >
+            View all publications →
+          </Link>
         </div>
       </div>
     </section>

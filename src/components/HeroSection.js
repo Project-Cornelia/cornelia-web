@@ -23,11 +23,11 @@ export default function HeroSection() {
         <p className="font-body-md text-body-sm md:text-body-md text-white/90 mb-10 max-w-2xl mx-auto">
           A national collective empowering women through legal advocacy, policy reform, and grassroots dialogue.
         </p>
-        <div className="flex flex-wrap justify-center gap-6">
-          <button className="bg-primary text-neutral-50 px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-primary hover:bg-transparent hover:text-white transition-all duration-300">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+          <button className="bg-primary text-neutral-50 w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-primary hover:bg-transparent hover:text-white transition-all duration-300">
             Get involved
           </button>
-          <button className="bg-transparent text-white px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-white hover:bg-white hover:text-primary transition-all duration-300">
+          <button className="bg-transparent text-white w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-white hover:bg-white hover:text-primary transition-all duration-300">
             Donate to us
           </button>
         </div>

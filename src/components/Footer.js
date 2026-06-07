@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        <div className="md:pl-12">
+        <div>
           <h4 className="font-headline-sm text-headline-sm mb-6">Navigation</h4>
           <ul className="space-y-3 text-sm">
             <li>

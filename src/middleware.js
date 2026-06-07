@@ -10,10 +10,11 @@ export function middleware(request) {
       return NextResponse.next()
     }
 
-    // Allow static assets and API routes
+    // Allow static assets, API routes, and CMS admin
     if (
       request.nextUrl.pathname.startsWith('/_next') ||
       request.nextUrl.pathname.startsWith('/api') ||
+      request.nextUrl.pathname.startsWith('/admin') ||
       request.nextUrl.pathname.startsWith('/images') ||
       request.nextUrl.pathname.startsWith('/public')
     ) {
