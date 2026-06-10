@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Header from '@/components/Header'
 import AboutHeroSection from '@/components/AboutHeroSection'
+import MembersSection from '@/components/MembersSection'
 import Footer from '@/components/Footer'
 
 export default function About() {
@@ -100,6 +101,8 @@ export default function About() {
             </div>
           </div>
         </section>
+
+        <MembersSection />
 
         {/* Team/Contributors Section */}
         <section className="py-section-padding-mobile md:py-section-padding-desktop">

@@ -18,8 +18,8 @@ export default function ArticlePage() {
     const fetchArticle = async () => {
       try {
         const [articleRes, allRes] = await Promise.all([
-          fetch(`/api/publications?slug=${params.slug}`),
-          fetch('/api/publications'),
+          fetch(`/api/frontend/publications?slug=${params.slug}`),
+          fetch('/api/frontend/publications'),
         ])
 
         if (!articleRes.ok) {

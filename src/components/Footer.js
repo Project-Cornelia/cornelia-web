@@ -43,18 +43,24 @@ export default function Footer() {
           <p className="font-body-sm text-body-sm text-neutral-100/70">
             Empowering women and youth through law, policy, and democratic participation.
           </p>
-          <div className="flex gap-5 pt-2">
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
-              <span>𝕏</span>
+            <div className="flex items-center gap-4 mt-4">
+            <a href="https://www.instagram.com/project.cornelia/" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
+              <Image
+                src="/images/instagram.svg"
+                alt="Instagram"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
-              📷
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
-              in
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
-              f
+            <a href="https://www.linkedin.com/company/project-cornelia/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
+              <Image
+                src="/images/linkedin.svg"
+                alt="LinkedIn"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
             </a>
           </div>
           <div className="pt-4">
@@ -81,7 +87,7 @@ export default function Footer() {
           <h4 className="font-headline-sm text-headline-sm mb-6">Navigation</h4>
           <ul className="space-y-3 text-sm">
             <li>
-              <Link href="/" className="text-neutral-100 font-bold underline underline-offset-4">
+              <Link href="/" className="text-neutral-100/70">
                 Home
               </Link>
             </li>
@@ -91,8 +97,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/blog" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Blogs
+              <Link href="/initiatives" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Initiatives
               </Link>
             </li>
             <li>
@@ -105,6 +111,16 @@ export default function Footer() {
                 Publications
               </Link>
             </li>
+            <li>
+              <Link href="/terms" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Terms
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Privacy
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -114,36 +130,45 @@ export default function Footer() {
           <form onSubmit={handleContactSubmit} className="space-y-4">
             <div>
               <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
-                Name:
+                Name
               </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-transparent border-none border-b border-on-secondary-fixed-variant focus:border-primary-fixed focus:ring-0 transition-colors py-1 text-sm text-neutral-100"
-              />
+              <div className="border-b border-neutral-100/30">
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full bg-transparent border-none focus:ring-0 py-2 text-sm text-neutral-100 placeholder-neutral-100/30"
+                />
+              </div>
             </div>
             <div>
               <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
-                Email:
+                Email
               </label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-transparent border-none border-b border-on-secondary-fixed-variant focus:border-primary-fixed focus:ring-0 transition-colors py-1 text-sm text-neutral-100"
-              />
+              <div className="border-b border-neutral-100/30">
+                <input
+                  type="email"
+                  placeholder="example@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full bg-transparent border-none focus:ring-0 py-2 text-sm text-neutral-100 placeholder-neutral-100/30"
+                />
+              </div>
             </div>
             <div>
               <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
-                Message:
+                Message
               </label>
-              <textarea
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows="1"
-                className="w-full bg-transparent border-none border-b border-on-secondary-fixed-variant focus:border-primary-fixed focus:ring-0 transition-colors py-1 text-sm text-neutral-100 resize-none"
-              />
+              <div className="border-b border-neutral-100/30">
+                <textarea
+                  placeholder="Your Message Here"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  rows="1"
+                  className="w-full bg-transparent border-none focus:ring-0 py-2 text-sm text-neutral-100 placeholder-neutral-100/30 resize-none"
+                />
+              </div>
             </div>
             <button
               type="submit"

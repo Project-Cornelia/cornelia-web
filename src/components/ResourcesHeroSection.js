@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function HeroSection() {
   return (
@@ -23,6 +24,14 @@ export default function HeroSection() {
                 <p className="font-body-md text-body-sm md:text-body-md text-white/90 mb-10 max-w-2xl mx-auto">
                   Access our comprehensive collection of guides, toolkits, and research documents designed to empower women and amplify voices in democratic discourse.
                 </p>
+                <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
+                  <Link href="/contact" className="inline-flex items-center justify-center bg-primary text-neutral-50 w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-primary hover:bg-transparent hover:text-white transition-all duration-300">
+                    Get involved
+                  </Link>
+                  <Link href="/donations" className="inline-flex items-center justify-center bg-transparent text-white w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-white hover:bg-white hover:text-primary transition-all duration-300">
+                    Donate to us
+                </Link>
+              </div>
               </div>
             </section>
   )

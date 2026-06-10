@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function PublicationsHeroSection() {
@@ -25,12 +26,12 @@ export default function PublicationsHeroSection() {
               A national collective empowering women through legal advocacy, policy reform, and grassroots dialogue.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
-              <button className="bg-primary text-neutral-50 w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-primary hover:bg-transparent hover:text-white transition-all duration-300">
+              <Link href="/contact" className="inline-flex items-center justify-center bg-primary text-neutral-50 w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-primary hover:bg-transparent hover:text-white transition-all duration-300">
                 Get involved
-              </button>
-              <button className="bg-transparent text-white w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-white hover:bg-white hover:text-primary transition-all duration-300">
+              </Link>
+              <Link href="/donations" className="inline-flex items-center justify-center bg-transparent text-white w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-white hover:bg-white hover:text-primary transition-all duration-300">
                 Donate to us
-              </button>
+              </Link>
             </div>
           </div>
         </section>

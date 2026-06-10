@@ -19,8 +19,9 @@ export default function ArticleContent({ imageUrl, children, content }) {
       {/* Prose Container */}
       <article className="max-w-3xl mx-auto px-gutter prose-container">
         <div className="font-body-lg text-body-lg text-on-surface leading-[1.8] space-y-8">
-          {children ||
-            (content && content.map((paragraph, idx) => <p key={idx}>{paragraph}</p>))}
+          {children || (content && (
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+          ))}
         </div>
 
         {/* Termination Sequence */}

@@ -16,7 +16,7 @@ export default function Publications() {
   useEffect(() => {
     const fetchPublications = async () => {
       try {
-        const response = await fetch('/api/publications')
+        const response = await fetch('/api/frontend/publications')
         const data = await response.json()
         setPublications(data)
       } catch (error) {

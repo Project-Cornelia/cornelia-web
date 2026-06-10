@@ -2,73 +2,31 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Initiatives() {
   const [expandedId, setExpandedId] = useState(null)
+  const [initiatives, setInitiatives] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const initiatives = [
-    {
-      id: 1,
-      title: 'Women in Democracy Initiative',
-      category: 'Policy Advocacy',
-      description: 'A comprehensive program aimed at increasing women\'s participation in democratic processes.',
-      fullDescription: 'This initiative works directly with women leaders and aspiring female policymakers to build their capacity and create pathways for participation in democratic institutions. We conduct workshops, mentorship programs, and facilitate networking opportunities.',
-      impact: '500+ women trained',
-      status: 'Active',
-      icon: '🏛️',
-    },
-    {
-      id: 2,
-      title: 'Legal Awareness Drives',
-      category: 'Education',
-      description: 'Campus and community-based awareness campaigns on women\'s rights and legal protections.',
-      fullDescription: 'We organize monthly awareness drives in collaboration with colleges and community centers, covering topics like harassment laws, workplace rights, property rights, and access to justice.',
-      impact: '2000+ people reached',
-      status: 'Active',
-      icon: '⚖️',
-    },
-    {
-      id: 3,
-      title: 'Acid Attack Survivors Support',
-      category: 'Fundraising & Support',
-      description: 'Fundraising campaigns and direct support for acid attack survivors in their rehabilitation.',
-      fullDescription: 'We partner with organizations working with acid attack survivors to raise funds for medical treatment, rehabilitation, and reintegration support. Our goal is to empower survivors and advocate for stricter laws.',
-      impact: '₹19,000+ raised',
-      status: 'Ongoing',
-      icon: '❤️',
-    },
-    {
-      id: 4,
-      title: 'Youth Leadership Program',
-      category: 'Capacity Building',
-      description: 'Developing next-generation leaders committed to social and policy change.',
-      fullDescription: 'This program provides comprehensive training in leadership, policy analysis, advocacy skills, and community organizing. Participants work on real-world projects addressing women\'s issues.',
-      impact: '150+ youth trained',
-      status: 'Active',
-      icon: '⭐',
-    },
-    {
-      id: 5,
-      title: 'Research & Analysis',
-      category: 'Research',
-      description: 'Conducting research on gender gaps in policy and democratic participation.',
-      fullDescription: 'Our research team analyzes policy documents, conducts surveys, and publishes reports on women\'s representation in various sectors. These findings inform our advocacy work.',
-      impact: '10+ research papers',
-      status: 'Ongoing',
-      icon: '📊',
-    },
-    {
-      id: 6,
-      title: 'Community Dialogue Series',
-      category: 'Engagement',
-      description: 'Regular forums for open conversations on women\'s issues and social change.',
-      fullDescription: 'We host community dialogues where women can share their experiences, learn from experts, and engage in meaningful conversations about creating systemic change.',
-      impact: '30+ events conducted',
-      status: 'Active',
-      icon: '💬',
-    },
-  ]
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      try {
+        const response = await fetch('/api/frontend/initiatives')
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+        }
+        const data = await response.json()
+        setInitiatives(data)
+      } catch (error) {
+        console.error('Error loading initiatives:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchInitiatives()
+  }, [])
 
   return (
     <>
@@ -96,7 +54,7 @@ export default function Initiatives() {
                   <div className="p-6">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
-                      <div className="text-4xl">{initiative.icon}</div>
+                      <div className="text-4xl">{initiative.emoji || '📌'}</div>
                       <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">
                         {initiative.category}
                       </span>

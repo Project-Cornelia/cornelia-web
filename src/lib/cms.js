@@ -30,17 +30,28 @@ function resolveImageUrl(image) {
 }
 
 function normalizePublication(doc) {
+  const content = doc.content
+  let html = ''
+  if (typeof content === 'string') {
+    html = content
+  } else if (Array.isArray(content)) {
+    html = content.map(p => `<p>${p}</p>`).join('\n')
+  } else if (content && typeof content === 'object') {
+    html = lexicalToHTML(content)
+  }
   return {
     id: doc.id,
     slug: doc.slug,
     title: doc.title,
     category: doc.category ?? '',
-    tags: doc.tags?.map(t => t.tag).filter(Boolean) ?? [],
+    tags: Array.isArray(doc.tags)
+      ? doc.tags.map(t => (typeof t === 'string' ? t : t.tag)).filter(Boolean)
+      : [],
     date: doc.date ?? null,
     author: doc.author ?? '',
     excerpt: doc.excerpt ?? '',
     image: resolveImageUrl(doc.image),
-    content: lexicalToHTML(doc.content),
+    content: html,
   }
 }
 
@@ -49,10 +60,24 @@ function normalizeResource(doc) {
     id: doc.id,
     title: doc.title,
     description: doc.description ?? '',
+    emoji: doc.emoji ?? null,
     category: doc.category ?? '',
     type: doc.type ?? '',
     downloadUrl: doc.downloadUrl ?? '#',
-    icon: doc.icon ?? null,
+  }
+}
+
+function normalizeInitiative(doc) {
+  return {
+    id: doc.id,
+    title: doc.title,
+    emoji: doc.emoji ?? null,
+    category: doc.category ?? '',
+    description: doc.description ?? '',
+    fullDescription: doc.fullDescription ?? '',
+    impact: doc.impact ?? '',
+    status: doc.status ?? 'Active',
+    order: doc.order ?? 0,
   }
 }
 
@@ -75,10 +100,10 @@ export async function getPublications() {
       limit: 200,
       sort: '-date',
     })
-    if (totalDocs === 0) return readJSON('publications.json')
+    if (totalDocs === 0) return readJSON('publications.json').then(d => d.map(normalizePublication))
     return docs.map(normalizePublication)
   } catch {
-    return readJSON('publications.json')
+    return readJSON('publications.json').then(d => d.map(normalizePublication))
   }
 }
 
@@ -92,12 +117,14 @@ export async function getPublicationBySlug(slug) {
     })
     if (docs.length === 0) {
       const all = await readJSON('publications.json')
-      return all.find(p => p.slug === slug) ?? null
+      const found = all.find(p => p.slug === slug)
+      return found ? normalizePublication(found) : null
     }
     return normalizePublication(docs[0])
   } catch {
     const all = await readJSON('publications.json')
-    return all.find(p => p.slug === slug) ?? null
+    const found = all.find(p => p.slug === slug)
+    return found ? normalizePublication(found) : null
   }
 }
 
@@ -125,6 +152,21 @@ export async function getMembers() {
     })
     if (totalDocs === 0) return []
     return docs.map(normalizeMember)
+  } catch {
+    return []
+  }
+}
+
+export async function getInitiatives() {
+  try {
+    const payload = await getPayloadInstance()
+    const { docs, totalDocs } = await payload.find({
+      collection: 'initiatives',
+      limit: 200,
+      sort: 'order',
+    })
+    if (totalDocs === 0) return []
+    return docs.map(normalizeInitiative)
   } catch {
     return []
   }

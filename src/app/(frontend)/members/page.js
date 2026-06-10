@@ -17,7 +17,7 @@ export default function Members() {
   const [members, setMembers] = useState(FALLBACK_MEMBERS)
 
   useEffect(() => {
-    fetch('/api/members')
+    fetch('/api/frontend/members')
       .then(r => r.json())
       .then(data => { if (data.length > 0) setMembers(data) })
       .catch(() => {})

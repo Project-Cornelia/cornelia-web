@@ -48,6 +48,11 @@ export default buildConfig({
         { name: 'title', type: 'text', required: true },
         { name: 'description', type: 'textarea', required: true },
         {
+          name: 'emoji',
+          type: 'text',
+          admin: { description: 'Emoji icon for this resource (e.g., 📄, 🎥, 📖)' },
+        },
+        {
           name: 'category',
           type: 'select',
           required: true,
@@ -82,6 +87,11 @@ export default buildConfig({
       admin: { useAsTitle: 'title' },
       fields: [
         { name: 'title', type: 'text', required: true },
+        {
+          name: 'emoji',
+          type: 'text',
+          admin: { description: 'Emoji icon for this initiative (e.g., 🏛️, ⚖️, ❤️)' },
+        },
         {
           name: 'category',
           type: 'text',

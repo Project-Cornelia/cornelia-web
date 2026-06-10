@@ -14,7 +14,7 @@ export default function Resources() {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const response = await fetch('/api/resources')
+        const response = await fetch('/api/frontend/resources')
         const data = await response.json()
         setResources(data)
       } catch (error) {
@@ -97,7 +97,7 @@ export default function Resources() {
                 >
                   {/* Icon/Header */}
                   <div className="mb-stack-md flex items-center justify-between">
-                    <div className="text-4xl">{resource.icon}</div>
+                    <div className="text-4xl">{resource.emoji || '📄'}</div>
                     <span className="inline-block px-3 py-1 bg-primary text-surface font-label-md text-label-md rounded-full">
                       {resource.type}
                     </span>
