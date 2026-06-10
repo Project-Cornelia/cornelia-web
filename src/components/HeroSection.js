@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
           <Image
-            src="https://i.ibb.co/67sfd5H4/Home-Hero.png"
+            src="https://i.ibb.co/GfRx83H0/5years.png"
             alt="Women collective gathering"
             fill
             className="object-cover brightness-40"
