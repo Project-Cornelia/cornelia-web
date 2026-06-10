@@ -17,12 +17,12 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-3xl animate-fade-in-up">
-        <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6 leading-tight">
+        {/* <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6 leading-tight">
           Making every woman's voice central to all conversations that matter.
         </h1>
         <p className="font-body-md text-body-sm md:text-body-md text-white/90 mb-10 max-w-2xl mx-auto">
           A national collective empowering women through legal advocacy, policy reform, and grassroots dialogue.
-        </p>
+        </p> */}
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
           <button className="bg-primary text-neutral-50 w-full sm:w-auto px-8 py-3 rounded-full font-label-lg text-label-lg border-2 border-primary hover:bg-transparent hover:text-white transition-all duration-300">
             Get involved

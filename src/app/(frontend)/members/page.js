@@ -1,9 +1,10 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-const members = [
+const FALLBACK_MEMBERS = [
   { name: 'Akanksha Sharma', role: 'Founder & Co-Leader', bio: 'Passionate about using law and policy as tools for social change.' },
   { name: 'Member 2', role: 'Co-Leader', bio: 'Dedicated to amplifying marginalized voices.' },
   { name: 'Member 3', role: 'Advocacy Lead', bio: 'Focused on policy advocacy and research.' },
@@ -13,6 +14,15 @@ const members = [
 ]
 
 export default function Members() {
+  const [members, setMembers] = useState(FALLBACK_MEMBERS)
+
+  useEffect(() => {
+    fetch('/api/members')
+      .then(r => r.json())
+      .then(data => { if (data.length > 0) setMembers(data) })
+      .catch(() => {})
+  }, [])
+
   return (
     <>
       <Header />
@@ -34,11 +44,15 @@ export default function Members() {
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-stack-md">
             {members.map((member, index) => (
               <div
-                key={index}
+                key={member.id ?? index}
                 className="bg-surface border border-neutral-100 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
               >
-                <div className="h-40 bg-surface-container-high flex items-center justify-center">
-                  <span className="text-6xl text-on-surface-variant/30">◎</span>
+                <div className="h-40 bg-surface-container-high flex items-center justify-center overflow-hidden">
+                  {member.photo ? (
+                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-6xl text-on-surface-variant/30">◎</span>
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="font-headline-sm text-headline-sm text-on-surface mb-1">{member.name}</h3>

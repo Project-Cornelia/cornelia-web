@@ -14,7 +14,7 @@ export default function Resources() {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const response = await fetch('/data/resources.json')
+        const response = await fetch('/api/resources')
         const data = await response.json()
         setResources(data)
       } catch (error) {

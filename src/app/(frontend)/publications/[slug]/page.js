@@ -17,29 +17,32 @@ export default function ArticlePage() {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch('/data/publications.json')
-        const publications = await response.json()
+        const [articleRes, allRes] = await Promise.all([
+          fetch(`/api/publications?slug=${params.slug}`),
+          fetch('/api/publications'),
+        ])
 
-        // Find article by slug
-        const currentArticle = publications.find(pub => pub.slug === params.slug)
-
-        if (currentArticle) {
-          setArticle(currentArticle)
-
-          // Get related articles (exclude current, take first 3)
-          const related = publications
-            .filter(pub => pub.id !== currentArticle.id)
-            .slice(0, 3)
-            .map(pub => ({
-              id: pub.id,
-              title: pub.title,
-              description: pub.excerpt,
-              category: pub.category,
-              image: pub.image,
-              slug: `/publications/${pub.slug}`,
-            }))
-          setRelatedArticles(related)
+        if (!articleRes.ok) {
+          setLoading(false)
+          return
         }
+
+        const currentArticle = await articleRes.json()
+        setArticle(currentArticle)
+
+        const publications = await allRes.json()
+        const related = publications
+          .filter(pub => pub.id !== currentArticle.id)
+          .slice(0, 3)
+          .map(pub => ({
+            id: pub.id,
+            title: pub.title,
+            description: pub.excerpt,
+            category: pub.category,
+            image: pub.image,
+            slug: `/publications/${pub.slug}`,
+          }))
+        setRelatedArticles(related)
       } catch (error) {
         console.error('Error loading article:', error)
       } finally {
