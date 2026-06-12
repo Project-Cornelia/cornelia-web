@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server'
+// Middleware disabled - using maintenance page as homepage only
+// To re-enable routing middleware in the future, restore this file
 
 export function middleware(request) {
   // Check if Phase 0 maintenance mode is enabled
@@ -29,13 +30,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: [],
 }
