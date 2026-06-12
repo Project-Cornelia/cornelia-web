@@ -1,0 +1,20 @@
+export default function DonationComponent2() {
+  return (
+    <div className="p-8 bg-surface-container-low rounded-xl border border-neutral-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+      <h3 className="font-headline-md text-headline-md text-on-surface mb-4">
+        Monthly Membership
+      </h3>
+      <p className="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+        Become a sustained supporter and be part of a growing community committed to women's empowerment and social justice.
+      </p>
+      <a
+        href="https://pages.razorpay.com/ProjectCornelia"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block w-full sm:w-auto px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 transition-all active:scale-95 shadow-md text-center"
+      >
+        Join as Member
+      </a>
+    </div>
+  )
+}
