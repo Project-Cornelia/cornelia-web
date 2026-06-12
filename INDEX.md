@@ -319,7 +319,7 @@ npm run dev
 - Browser testing tips
 - **Read time:** 5 minutes
 
-### 3. **DEVELOPMENT.md** - DETAILED GUIDE
+### 3. **DEVELOPMENT.md**  - DETAILED GUIDE
 - Step-by-step setup
 - File structure explanation
 - How to customize each section
