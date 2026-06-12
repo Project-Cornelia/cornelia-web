@@ -40,7 +40,3 @@ payload.db
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Mock designs and design language
-Designs/
-/.kiro/
