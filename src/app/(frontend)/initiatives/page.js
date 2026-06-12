@@ -3,6 +3,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useState, useEffect } from 'react'
+import HeroSection from '@/components/HeroSection'
 
 export default function Initiatives() {
   const [expandedId, setExpandedId] = useState(null)
@@ -32,7 +33,10 @@ export default function Initiatives() {
     <>
       <Header />
       <main>
-        {/* Page Header */}
+
+      <HeroSection />
+
+      {/* Page Header */}
         <section className="bg-gray-100 py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Initiatives</h1>
@@ -40,7 +44,7 @@ export default function Initiatives() {
               Detailed overview of programs and projects we're running
             </p>
           </div>
-        </section>
+        </section>  
 
         {/* Initiatives Grid */}
         <section className="section">
