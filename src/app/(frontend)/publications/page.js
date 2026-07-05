@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import PublicationsHeroSection from '@/components/PublicationsHeroSection'
-import FeaturedPublicationsSection from '@/components/FeaturedPublicationsSection'
 import PublicationsFilterBar from '@/components/PublicationsFilterBar'
 import PublicationsGrid from '@/components/PublicationsGrid'
 import WriteForUs from '@/components/WriteForUs'
@@ -12,6 +11,7 @@ import Footer from '@/components/Footer'
 export default function Publications() {
   const [publications, setPublications] = useState([])
   const [loading, setLoading] = useState(true)
+  const [activeFilter, setActiveFilter] = useState('All')
 
   useEffect(() => {
     const fetchPublications = async () => {
@@ -28,6 +28,10 @@ export default function Publications() {
 
     fetchPublications()
   }, [])
+
+  const filteredPublications = activeFilter === 'All' 
+    ? publications 
+    : publications.filter(pub => pub.category === activeFilter)
 
   if (loading) {
     return (
@@ -48,9 +52,8 @@ export default function Publications() {
       <Header />
       <main className="bg-surface overflow-x-hidden">
         <PublicationsHeroSection />
-        <FeaturedPublicationsSection publications={publications} />
-        <PublicationsFilterBar />
-        <PublicationsGrid publications={publications} />
+        <PublicationsFilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+        <PublicationsGrid publications={filteredPublications} />
         <WriteForUs />
       </main>
       <Footer />

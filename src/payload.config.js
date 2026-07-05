@@ -19,7 +19,12 @@ export default buildConfig({
       fields: [
         { name: 'title', type: 'text', required: true },
         { name: 'slug', type: 'text', required: true, unique: true },
-        { name: 'category', type: 'text', required: true },
+        {
+          name: 'category',
+          type: 'select',
+          required: true,
+          options: ['Blogs', 'Reports', 'Research'],
+        },
         {
           name: 'tags',
           type: 'array',

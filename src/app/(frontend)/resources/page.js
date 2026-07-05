@@ -37,48 +37,33 @@ export default function Resources() {
     <>
       <Header />
       <ResourcesHeroSection />
-      <main className="bg-surface overflow-x-hidden">
-        {/* Hero Section */}
-        {/* <section className="relative min-h-screen flex items-end justify-center text-center px-gutter pb-24 md:pb-32 pt-24">
-          <div className="absolute inset-0 z-0">
-            <div className="relative w-full h-full">
-              <Image
-                src="https://ibb.co/DHKSqn97"
-                alt="Resources and knowledge"
-                fill
-                className="object-cover brightness-40"
-              />
-            </div>
-          </div>
+      
+      {/* Category Filter */}
+      <section className="bg-surface-container-lowest sticky top-20 z-40 py-6 border-y border-neutral-100">
+        <div className="max-w-7xl mx-auto px-gutter flex items-center gap-4 overflow-x-auto">
+          <span className="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest mr-4 whitespace-nowrap">
+            Filter By:
+          </span>
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-6 py-2 rounded-full font-label-md text-label-md whitespace-nowrap transition-all duration-300 ${
+                activeCategory === cat
+                  ? 'bg-neutral-900 text-neutral-50'
+                  : 'bg-transparent border border-neutral-100 hover:border-primary hover:text-primary'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
 
-          <div className="relative z-10 max-w-3xl animate-fade-in-up">
-            <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6 leading-tight">
-              Knowledge and Tools for Empowerment
-            </h1>
-            <p className="font-body-md text-body-sm md:text-body-md text-white/90 mb-10 max-w-2xl mx-auto">
-              Access our comprehensive collection of guides, toolkits, and research documents designed to empower women and amplify voices in democratic discourse.
-            </p>
-          </div>
-        </section> */}
+      <main className="bg-surface overflow-x-hidden">
 
         {/* Resources Section */}
         <section className="py-section-padding-mobile md:py-section-padding-desktop max-w-7xl mx-auto px-gutter">
-          {/* Category Filter */}
-          <div className="mb-stack-lg flex flex-wrap gap-3 justify-center">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-2 rounded-full font-label-lg text-label-lg transition-all duration-300 ${
-                  activeCategory === cat
-                    ? 'bg-primary text-surface'
-                    : 'bg-surface-container text-on-surface border border-neutral-100 hover:border-primary hover:text-primary'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
 
           {/* Resources Grid */}
           {loading ? (

@@ -1,11 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-
-export default function PublicationsFilterBar() {
-  const [activeFilter, setActiveFilter] = useState('All')
-
-  const filters = ['All', 'Blogs', 'Reports', 'References']
+export default function PublicationsFilterBar({ activeFilter, setActiveFilter }) {
+  const filters = ['All', 'Blogs', 'Reports', 'Research']
 
   return (
     <section className="bg-surface-container-lowest sticky top-20 z-40 py-6 border-y border-neutral-100">

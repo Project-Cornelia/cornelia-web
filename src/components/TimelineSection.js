@@ -35,7 +35,7 @@ export default function TimelineSection() {
       <div className="max-w-7xl mx-auto">
         <div className={`mb-stack-lg text-left md:w-1/2 reveal ${isVisible ? 'visible' : ''}`}>
           <h2 className="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">
-            Our Past
+            Our Story
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant">
             Born as a student-led movement, growing into a national women's collective.
