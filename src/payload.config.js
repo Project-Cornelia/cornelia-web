@@ -119,12 +119,13 @@ export default buildConfig({
     },
   ],
   globals: [],
-  secret: process.env.PAYLOAD_SECRET || 'local-dev-secret-key-12395',
+  secret: process.env.PAYLOAD_SECRET,
   editor: lexicalEditor(),
   plugins: [],
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL || 'file:./payload.db',
+      url: process.env.TURSO_DB_URL || '',
+      authToken: process.env.AUTH_TOKEN,
     },
   }),
 })
