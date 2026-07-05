@@ -6,8 +6,11 @@ import { useState } from 'react'
 
 export default function PublicationsGrid({ publications = [] }) {
   const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 3
 
-  const displayedPublications = publications.slice(0, 3)
+  const totalPages = Math.ceil(publications.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const displayedPublications = publications.slice(startIndex, startIndex + itemsPerPage)
 
   return (
     <section className="max-w-7xl mx-auto px-gutter py-section-padding-desktop">
@@ -61,13 +64,21 @@ export default function PublicationsGrid({ publications = [] }) {
 
       {/* Pagination */}
       <div className="mt-section-padding-mobile flex justify-center items-center gap-4">
-        <button className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+        <button 
+          onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+          className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <span className="font-label-lg text-label-lg">{currentPage} of 12</span>
-        <button className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+        <span className="font-label-lg text-label-lg">{currentPage} of {totalPages}</span>
+        <button 
+          onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+          disabled={currentPage === totalPages}
+          className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

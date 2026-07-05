@@ -7,6 +7,7 @@ import { useState } from 'react'
 export default function Footer() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [subscribed, setSubscribed] = useState(false)
+  const currentYear = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', year: 'numeric' })
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault()
@@ -165,7 +166,7 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-gutter py-6 border-t border-on-secondary-fixed-variant/20 text-center md:text-left">
         <p className="font-body-sm text-body-sm text-neutral-100/50">
-          © 2026 Project Cornelia. All rights reserved.
+          © {currentYear} Project Cornelia. All rights reserved.
         </p>
       </div>
     </footer>
