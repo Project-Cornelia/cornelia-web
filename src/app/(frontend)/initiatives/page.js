@@ -3,7 +3,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useState, useEffect } from 'react'
-import HeroSection from '@/components/HeroSection'
+import InitiativesHeroSection from '@/components/InitiativesHeroSection'
 
 export default function Initiatives() {
   const [expandedId, setExpandedId] = useState(null)
@@ -34,7 +34,7 @@ export default function Initiatives() {
       <Header />
       <main>
 
-      <HeroSection />
+      <InitiativesHeroSection />
 
       {/* Page Header */}
         <section className="bg-gray-100 py-12">
@@ -45,6 +45,35 @@ export default function Initiatives() {
             </p>
           </div>
         </section>  
+
+        {/* Statistics */}
+        <section className="bg-gray-50 section">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold mb-12 text-center">Our Collective Impact</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white rounded-lg p-8 text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">50+</div>
+                <p className="text-gray-600">Months Operating</p>
+              </div>
+
+              <div className="bg-white rounded-lg p-8 text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">7000+</div>
+                <p className="text-gray-600">Lives Impacted</p>
+              </div>
+
+              <div className="bg-white rounded-lg p-8 text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">6+</div>
+                <p className="text-gray-600">Active Initiatives</p>
+              </div>
+
+              <div className="bg-white rounded-lg p-8 text-center">
+                <div className="text-4xl font-bold text-gray-900 mb-2">₹19K+</div>
+                <p className="text-gray-600">Funds Raised</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Initiatives Grid */}
         <section className="section">
@@ -102,35 +131,6 @@ export default function Initiatives() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Statistics */}
-        <section className="bg-gray-50 section">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-12 text-center">Our Collective Impact</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="bg-white rounded-lg p-8 text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">50+</div>
-                <p className="text-gray-600">Months Operating</p>
-              </div>
-
-              <div className="bg-white rounded-lg p-8 text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">7000+</div>
-                <p className="text-gray-600">Lives Impacted</p>
-              </div>
-
-              <div className="bg-white rounded-lg p-8 text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">6+</div>
-                <p className="text-gray-600">Active Initiatives</p>
-              </div>
-
-              <div className="bg-white rounded-lg p-8 text-center">
-                <div className="text-4xl font-bold text-gray-900 mb-2">₹19K+</div>
-                <p className="text-gray-600">Funds Raised</p>
-              </div>
             </div>
           </div>
         </section>

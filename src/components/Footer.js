@@ -28,19 +28,19 @@ export default function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-gutter py-12 md:py-16">
         {/* Brand & Info */}
         <div className="space-y-4">
-          <div className="font-headline-sm text-headline-sm font-bold text-neutral-100 flex items-center gap-3">
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1.5">
+          <div className="font-headline-md text-headline-md font-bold text-neutral-100 flex items-center gap-3">
+            <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center p-1.5">
               <Image
                 src="/images/p_cornelia_logo.png"
                 alt="Cornelia Logo"
-                width={32}
-                height={32}
-                className="h-6 w-auto object-contain"
+                width={40}
+                height={40}
+                className="h-20 w-20 object-contain"
               />
             </div>
             Project Cornelia
           </div>
-          <p className="font-body-sm text-body-sm text-neutral-100/70">
+          <p className="font-body-md text-body-md text-neutral-100/70">
             Empowering women and youth through law, policy, and democratic participation.
           </p>
             <div className="flex items-center gap-4 mt-4">
@@ -48,37 +48,20 @@ export default function Footer() {
               <Image
                 src="/images/instagram.svg"
                 alt="Instagram"
-                width={20}
-                height={20}
-                className="w-5 h-5"
+                width={40}
+                height={40}
+                className="w-10 h-10"
               />
             </a>
             <a href="https://www.linkedin.com/company/project-cornelia/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
               <Image
                 src="/images/linkedin.svg"
                 alt="LinkedIn"
-                width={20}
-                height={20}
-                className="w-5 h-5"
+                width={40}
+                height={40}
+                className="w-10 h-10"
               />
             </a>
-          </div>
-          <div className="pt-4">
-            <h4 className="font-label-lg mb-2">Join Our Newsletter:</h4>
-            <form onSubmit={handleNewsletterSubmit} className="flex border-b border-neutral-100/30">
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="bg-transparent border-none focus:ring-0 w-full py-1 placeholder-neutral-100/30 text-sm"
-                placeholder="Email Address"
-                required
-              />
-              <button type="submit" className="p-1 text-primary-fixed">
-                →
-              </button>
-            </form>
-            {subscribed && <p className="text-primary-fixed text-xs mt-2">Thanks for subscribing!</p>}
           </div>
         </div>
 
