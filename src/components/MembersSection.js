@@ -2,24 +2,35 @@
 
 import { useEffect, useState } from 'react'
 
-const FALLBACK_MEMBERS = [
-  { name: 'Akanksha Sharma', role: 'Founder & Co-Leader', bio: 'Passionate about using law and policy as tools for social change.' },
-  { name: 'Member 2', role: 'Co-Leader', bio: 'Dedicated to amplifying marginalized voices.' },
-  { name: 'Member 3', role: 'Advocacy Lead', bio: 'Focused on policy advocacy and research.' },
-  { name: 'Member 4', role: 'Community Engagement Lead', bio: 'Building bridges between communities and organizations.' },
-  { name: 'Member 5', role: 'Communications Lead', bio: 'Telling stories of impact and change.' },
-  { name: 'Member 6', role: 'Member', bio: 'Contributing to our collective mission.' },
-]
-
 export default function MembersSection() {
-  const [members, setMembers] = useState(FALLBACK_MEMBERS)
+  const [members, setMembers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/frontend/members')
       .then(r => r.json())
-      .then(data => { if (data.length > 0) setMembers(data) })
-      .catch(() => {})
+      .then(data => { 
+        if (data.length > 0) setMembers(data)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
   }, [])
+
+  if (loading) {
+    return (
+      <section className="py-section-padding-mobile md:py-section-padding-desktop px-gutter">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center py-12">
+            <p className="font-body-md text-on-surface-variant">Loading team members...</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (members.length === 0) {
+    return null
+  }
 
   return (
     <section className="py-section-padding-mobile md:py-section-padding-desktop px-gutter">
@@ -39,7 +50,7 @@ export default function MembersSection() {
               key={member.id ?? index}
               className="bg-surface border border-neutral-100 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="h-40 bg-surface-container-high flex items-center justify-center overflow-hidden">
+              <div className="aspect-square bg-surface-container-high flex items-center justify-center overflow-hidden">
                 {member.photo ? (
                   <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
                 ) : (
