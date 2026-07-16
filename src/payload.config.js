@@ -1,6 +1,8 @@
 import { buildConfig } from 'payload'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
+import { cloudinaryAdapter } from './cloudinaryAdapter.js'
 
 export default buildConfig({
   admin: {
@@ -126,7 +128,20 @@ export default buildConfig({
   globals: [],
   secret: process.env.PAYLOAD_SECRET,
   editor: lexicalEditor(),
-  plugins: [],
+  
+  // Clean cloud storage integration entry
+  plugins: [
+    cloudStoragePlugin({
+      collections: {
+        media: {
+          adapter: cloudinaryAdapter,
+          // disablePayloadAccessControl: true, // Tells Payload to route straight to Cloudinary URLs
+          disableLocalStorage: true,
+        },
+      },
+    }),
+  ],
+  
   db: sqliteAdapter({
     client: {
       url: process.env.TURSO_DB_URL || '',
