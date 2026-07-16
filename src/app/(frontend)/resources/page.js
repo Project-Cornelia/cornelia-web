@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import Image from 'next/image'
-import ResourcesHeroSection from '@/components/ResourcesHeroSection'
+import ResourcesCat from '@/components/Resources/ResourcesFilter'
+import ResourcesHeroSection from '@/components/Resources/ResourcesHeroSection'
+import ResourcesGrid from '@/components/Resources/ResourcesGrid'
+import ResourcesCTA from '@/components/Resources/ResourcesCTA'
 
 export default function Resources() {
   const [resources, setResources] = useState([])
@@ -36,110 +38,27 @@ export default function Resources() {
   return (
     <>
       <Header />
+
+      {/* Hero Section */}
       <ResourcesHeroSection />
       
       {/* Category Filter */}
-      <section className="bg-surface-container-lowest sticky top-20 z-40 py-6 border-y border-neutral-100">
-        <div className="max-w-7xl mx-auto px-gutter flex items-center gap-4 overflow-x-auto">
-          <span className="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest mr-4 whitespace-nowrap">
-            Filter By:
-          </span>
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-2 rounded-full font-label-md text-label-md whitespace-nowrap transition-all duration-300 ${
-                activeCategory === cat
-                  ? 'bg-neutral-900 text-neutral-50'
-                  : 'bg-transparent border border-neutral-100 hover:border-primary hover:text-primary'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
+      <ResourcesCat 
+        categories={categories} 
+        activeCategory={activeCategory} 
+        setActiveCategory={setActiveCategory} 
+      />
 
       <main className="bg-surface overflow-x-hidden">
 
         {/* Resources Section */}
-        <section className="py-section-padding-mobile md:py-section-padding-desktop max-w-7xl mx-auto px-gutter">
-
-          {/* Resources Grid */}
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <p className="font-body-md text-on-surface-variant">Loading resources...</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-lg">
-              {filteredResources.map(resource => (
-                <a
-                  key={resource.id}
-                  href={resource.downloadUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-surface-container border border-neutral-100 rounded-xl p-stack-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2"
-                >
-                  {/* Icon/Header */}
-                  <div className="mb-stack-md flex items-center justify-between">
-                    <div className="text-4xl">{resource.emoji || '📄'}</div>
-                    <span className="inline-block px-3 py-1 bg-primary text-surface font-label-md text-label-md rounded-full">
-                      {resource.type}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="space-y-stack-sm">
-                    <div>
-                      <span className="text-primary font-label-md text-label-md uppercase tracking-widest">
-                        {resource.category}
-                      </span>
-                      <h3 className="font-headline-sm text-headline-sm text-on-surface mt-2 group-hover:text-primary transition-colors">
-                        {resource.title}
-                      </h3>
-                    </div>
-
-                    <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                      {resource.description}
-                    </p>
-
-                    {/* Download Button */}
-                    <div className="flex items-center gap-2 text-primary font-label-lg text-label-lg pt-stack-sm">
-                      Download
-                      <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19v-7m0 0V5m0 7H5m7 0h7" />
-                      </svg>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          )}
-        </section>
+        <ResourcesGrid loading={loading} filteredResources={filteredResources} />
 
         {/* Call to Action Section */}
-        <section className="py-section-padding-mobile md:py-section-padding-desktop bg-surface-container-low">
-          <div className="max-w-7xl mx-auto px-gutter text-center">
-            <div className="mb-stack-lg">
-              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">
-                Can't Find What You're Looking For?
-              </h2>
-              <div className="w-12 h-1 bg-primary mx-auto"></div>
-            </div>
+        <ResourcesCTA />
 
-            <p className="font-body-md text-body-md text-on-surface-variant mb-8 max-w-2xl mx-auto">
-              Get in touch with our team. We're always developing new resources and would love to hear what you need.
-            </p>
-
-            <a
-              href="mailto:hello@projectcornelia.org"
-              className="inline-block px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 transition-all duration-300 active:scale-95 shadow-md"
-            >
-              Contact Us
-            </a>
-          </div>
-        </section>
       </main>
+      
       <Footer />
     </>
   )

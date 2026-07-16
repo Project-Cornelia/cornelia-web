@@ -2,27 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import ContactForm from './Contact/ContactForm'
 
 export default function Footer() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [subscribed, setSubscribed] = useState(false)
   const currentYear = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', year: 'numeric' })
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault()
-    if (formData.email) {
-      setSubscribed(true)
-      setFormData({ ...formData, email: '' })
-      setTimeout(() => setSubscribed(false), 3000)
-    }
-  }
-
-  const handleContactSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission
-    setFormData({ name: '', email: '', message: '' })
-  }
 
   return (
     <footer className="w-full bg-neutral-900 text-neutral-100 border-t border-on-secondary-fixed-variant">
@@ -70,29 +53,54 @@ export default function Footer() {
         <div>
           <h4 className="font-headline-sm text-headline-sm mb-6">Navigation</h4>
           <ul className="space-y-3 text-sm">
-            <li>
+            {/* <li>
               <Link href="/" className="text-neutral-100/70">
                 Home
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/about" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
                 About
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
+              <Link href="/publications" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Publications
+              </Link>
+            </li> */}
+            {/* <li>
               <Link href="/initiatives" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
                 Initiatives
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/resources" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
                 Resources
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/our-work" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Publications
+                Our Work
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/donations" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Donate
+              </Link>
+            </li>
+            <li>
+              <Link href="/members" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Members
+              </Link>
+            </li>
+            <li>
+              <Link href="/maintenance" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Maintenance
               </Link>
             </li>
             <li>
@@ -111,56 +119,7 @@ export default function Footer() {
         {/* Contact Form */}
         <div>
           <h4 className="font-headline-sm text-headline-sm mb-6">Get in Touch</h4>
-          <form onSubmit={handleContactSubmit} className="space-y-4">
-            <div>
-              <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
-                Name
-              </label>
-              <div className="border-b border-neutral-100/30">
-                <input
-                  type="text"
-                  placeholder="John Doe"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-transparent border-none focus:ring-0 py-2 text-sm text-neutral-100 placeholder-neutral-100/30"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
-                Email
-              </label>
-              <div className="border-b border-neutral-100/30">
-                <input
-                  type="email"
-                  placeholder="example@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-transparent border-none focus:ring-0 py-2 text-sm text-neutral-100 placeholder-neutral-100/30"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block font-label-md text-label-md text-neutral-100/50 mb-0.5">
-                Message
-              </label>
-              <div className="border-b border-neutral-100/30">
-                <textarea
-                  placeholder="Your Message Here"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows="1"
-                  className="w-full bg-transparent border-none focus:ring-0 py-2 text-sm text-neutral-100 placeholder-neutral-100/30 resize-none"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="bg-neutral-100 text-neutral-900 px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-primary-fixed transition-colors"
-            >
-              Submit
-            </button>
-          </form>
+          <ContactForm variant="footer" />
         </div>
       </div>
 

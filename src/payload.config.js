@@ -120,10 +120,37 @@ export default buildConfig({
       slug: 'media',
       upload: true,
       admin: { useAsTitle: 'filename' },
+      access: {
+        create: ({ req: { user } }) => Boolean(user),
+        read: () => true, // Public can read media files
+        update: ({ req: { user } }) => Boolean(user),
+        delete: ({ req: { user } }) => Boolean(user),
+      },
       fields: [
         { name: 'alt', type: 'text', required: true },
       ],
     },
+    {
+      slug: 'messages',
+      admin: {
+        useAsTitle: 'email',
+        defaultColumns: ['name', 'email', 'createdAt'],
+      },
+      // Public can create submissions, but only authenticated users see them
+      access: {
+        create: () => true,
+        read: ({ req: { user } }) => Boolean(user),
+        update: ({ req: { user } }) => Boolean(user),
+        delete: ({ req: { user } }) => Boolean(user),
+      },
+      fields: [
+        { name: 'name', type: 'text', required: true },
+        { name: 'email', type: 'text', required: true },
+        { name: 'subject', type: 'text', required: false },
+        { name: 'message', type: 'textarea', required: true },
+      ],
+      timestamps: true, // Automatically logs the exact date and time it was sent
+    }
   ],
   globals: [],
   secret: process.env.PAYLOAD_SECRET,
@@ -135,7 +162,6 @@ export default buildConfig({
       collections: {
         media: {
           adapter: cloudinaryAdapter,
-          // disablePayloadAccessControl: true, // Tells Payload to route straight to Cloudinary URLs
           disableLocalStorage: true,
         },
       },

@@ -1,9 +1,9 @@
 'use client'
 
 import Header from '@/components/Header'
-import ArticleHero from '@/components/ArticleHero'
-import ArticleContent from '@/components/ArticleContent'
-import RelatedArticles from '@/components/RelatedArticles'
+import ArticleHero from '@/components/Article/ArticleHero'
+import ArticleContent from '@/components/Article/ArticleContent'
+import RelatedArticles from '@/components/Article/RelatedArticles'
 import Footer from '@/components/Footer'
 
 export default function ArticlePage() {
