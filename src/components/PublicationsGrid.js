@@ -27,7 +27,6 @@ export default function PublicationsGrid({ publications = [] }) {
                   alt={pub.title}
                   fill
                   className="object-cover group-hover:scale-105 group-hover:grayscale-0 transition-all duration-500"
-                  style={{ filter: 'grayscale(1)' }}
                 />
               </div>
               <div className="md:col-span-8 flex flex-col justify-center">
