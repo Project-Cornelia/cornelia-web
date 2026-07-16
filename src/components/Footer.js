@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import ContactForm from './ContactForm'
+import ContactForm from './Contact/ContactForm'
 
 export default function Footer() {
   const currentYear = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', year: 'numeric' })
@@ -53,29 +53,54 @@ export default function Footer() {
         <div>
           <h4 className="font-headline-sm text-headline-sm mb-6">Navigation</h4>
           <ul className="space-y-3 text-sm">
-            <li>
+            {/* <li>
               <Link href="/" className="text-neutral-100/70">
                 Home
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/about" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
                 About
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
+              <Link href="/publications" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Publications
+              </Link>
+            </li> */}
+            {/* <li>
               <Link href="/initiatives" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
                 Initiatives
               </Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link href="/resources" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
                 Resources
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/our-work" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Publications
+                Our Work
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/donations" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Donate
+              </Link>
+            </li>
+            <li>
+              <Link href="/members" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Members
+              </Link>
+            </li>
+            <li>
+              <Link href="/maintenance" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
+                Maintenance
               </Link>
             </li>
             <li>

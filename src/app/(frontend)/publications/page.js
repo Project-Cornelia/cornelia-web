@@ -1,11 +1,15 @@
+// **Important notice**
+// Publications page actually represents the Blogs & Writings page in the website. This is just how the naming is done as the CMS settings recognize blogs as publications.
+
+
 'use client'
 
 import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
-import PublicationsHeroSection from '@/components/PublicationsHeroSection'
-import PublicationsFilterBar from '@/components/PublicationsFilterBar'
-import PublicationsGrid from '@/components/PublicationsGrid'
-import WriteForUs from '@/components/WriteForUs'
+import PublicationsHeroSection from '@/components/Publications/PublicationsHeroSection'
+import PublicationsFilterBar from '@/components/Publications/PublicationsFilterBar'
+import PublicationsGrid from '@/components/Publications/PublicationsGrid'
+import WriteForUs from '@/components/Publications/WriteForUs'
 import Footer from '@/components/Footer'
 
 export default function Publications() {
@@ -51,10 +55,19 @@ export default function Publications() {
     <>
       <Header />
       <main className="bg-surface overflow-x-hidden">
+
+        {/* Hero Section */}
         <PublicationsHeroSection />
+
+        {/* Filter Bar and Publications Grid */}
         <PublicationsFilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+
+        {/* Publications Grid */}
         <PublicationsGrid publications={filteredPublications} />
+
+        {/* Write For Us Section */}
         <WriteForUs />
+        
       </main>
       <Footer />
     </>

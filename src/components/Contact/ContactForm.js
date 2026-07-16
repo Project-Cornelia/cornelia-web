@@ -123,7 +123,7 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
         <button
           type="submit"
           disabled={loading}
-          className="bg-neutral-100 text-neutral-900 px-6 py-2 rounded-full font-label-lg text-label-lg hover:bg-primary-fixed transition-colors disabled:opacity-50"
+          className="bg-neutral-100 text-neutral-900 px-6 py-2 rounded-md font-label-lg text-label-lg hover:bg-primary-fixed transition-colors disabled:opacity-50"
         >
           {loading ? 'Sending...' : 'Submit'}
         </button>
@@ -215,7 +215,7 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 disabled:opacity-50 transition-all active:scale-95 shadow-md"
+          className="w-full px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-xl hover:opacity-90 disabled:opacity-50 transition-all active:scale-95 shadow-md"
         >
           {loading ? 'Sending...' : 'Send Message'}
         </button>

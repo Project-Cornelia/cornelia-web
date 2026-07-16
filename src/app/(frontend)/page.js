@@ -2,33 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
-import HeroSection from '@/components/HeroSection'
-import TimelineSection from '@/components/TimelineSection'
-import ThreePillarsSection from '@/components/ThreePillarsSection'
-import PublicationsSection from '@/components/PublicationsSection'
+import HeroSection from '@/components/Home/HeroSection'
+import TimelineSection from '@/components/Home/TimelineSection'
+import ThreePillarsSection from '@/components/Home/ThreePillarsSection'
 import Footer from '@/components/Footer'
-import FeaturedPublicationsSection from '@/components/FeaturedPublicationsSection'
-
-// export default function Home() {
-
-  // export default function Home() {
-  //   const [publications, setPublications] = useState([])
-    
-  //   useEffect(() => {
-  //     const fetchPublications = async () => {
-  //       try {
-  //         const response = await fetch('/api/frontend/publications')
-  //         const data = await response.json()
-  //         setPublications(data)
-  //       } catch (error) {
-  //         console.error('Error loading publications:', error)
-  //       } finally {
-  //         setLoading(false)
-  //       }
-  //     }
-  
-  //     fetchPublications()
-  //   }, [])
+import FeaturedPublicationsSection from '@/components/Home/FeaturedPublicationsSection'
 
   export default function Home() {
     const [publications, setPublications] = useState([])
@@ -72,7 +50,6 @@ import FeaturedPublicationsSection from '@/components/FeaturedPublicationsSectio
         <TimelineSection />
         <ThreePillarsSection />
         <FeaturedPublicationsSection publications={publications} />
-        {/* <PublicationsSection /> */}
       </main>
       <Footer />
     </>

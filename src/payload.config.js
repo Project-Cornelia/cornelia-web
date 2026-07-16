@@ -120,6 +120,12 @@ export default buildConfig({
       slug: 'media',
       upload: true,
       admin: { useAsTitle: 'filename' },
+      access: {
+        create: ({ req: { user } }) => Boolean(user),
+        read: () => true, // Public can read media files
+        update: ({ req: { user } }) => Boolean(user),
+        delete: ({ req: { user } }) => Boolean(user),
+      },
       fields: [
         { name: 'alt', type: 'text', required: true },
       ],

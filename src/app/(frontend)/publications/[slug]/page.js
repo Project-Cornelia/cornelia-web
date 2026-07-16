@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Header from '@/components/Header'
-import ArticleHero from '@/components/ArticleHero'
-import ArticleContent from '@/components/ArticleContent'
-import RelatedArticles from '@/components/RelatedArticles'
+import ArticleHero from '@/components/Article/ArticleHero'
+import ArticleContent from '@/components/Article/ArticleContent'
+import RelatedArticles from '@/components/Article/RelatedArticles'
 import Footer from '@/components/Footer'
 
 export default function ArticlePage() {
@@ -81,18 +81,22 @@ export default function ArticlePage() {
     <>
       <Header />
       <main className="pt-44 pb-section-padding-desktop bg-surface">
+
         <ArticleHero
           title={article.title}
           author={article.author}
           date={article.date}
         />
+
         <ArticleContent
           imageUrl={article.image}
           content={article.content}
         />
+
         {relatedArticles.length > 0 && (
           <RelatedArticles articles={relatedArticles} />
         )}
+        
       </main>
       <Footer />
     </>
