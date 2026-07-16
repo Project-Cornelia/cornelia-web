@@ -43,9 +43,10 @@ export default function About() {
             <div className="relative group">
               <div className="aspect-square bg-surface-container rounded-xl overflow-hidden border border-neutral-100">
                 <Image
-                  src="https://i.ibb.co/217NprcX/India-Cornelia.png"
+                  src="https://res.cloudinary.com/vbi4em8b/image/upload/v1784192079/AT7_7795_ql3qo9.webp"
                   alt="Project Cornelia locations across India"
                   fill
+                  priority
                   className="object-cover"
                 />
               </div>

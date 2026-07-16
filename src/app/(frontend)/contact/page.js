@@ -1,36 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ContactForm from '@/components/ContactForm'
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      setSubmitted(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      setTimeout(() => setSubmitted(false), 5000)
-    } catch (error) {
-      console.error('Error submitting form:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const inputClass = 'w-full px-4 py-3 bg-surface border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors'
-
   return (
     <>
       <Header />
@@ -104,41 +78,7 @@ export default function Contact() {
 
             {/* Contact Form */}
             <div>
-              <h2 className="font-headline-sm text-headline-sm text-on-surface mb-8">Send us a Message</h2>
-
-              {submitted && (
-                <div className="mb-6 p-4 bg-surface-container border border-primary/30 rounded-xl">
-                  <p className="font-body-sm text-body-sm text-primary font-semibold">
-                    ✓ Message sent! We'll be in touch soon.
-                  </p>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Full Name</label>
-                  <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className={inputClass} placeholder="Your name" />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Email Address</label>
-                  <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className={inputClass} placeholder="your@email.com" />
-                </div>
-                <div>
-                  <label htmlFor="subject" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Subject</label>
-                  <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleChange} required className={inputClass} placeholder="What is this about?" />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">Message</label>
-                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows="5" className={`${inputClass} resize-none`} placeholder="Your message..." />
-                </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full px-8 py-3 bg-primary text-surface font-label-lg text-label-lg rounded-full hover:opacity-90 disabled:opacity-50 transition-all active:scale-95 shadow-md"
-                >
-                  {loading ? 'Sending...' : 'Send Message'}
-                </button>
-              </form>
+              <ContactForm variant="full" />
             </div>
           </div>
         </section>
