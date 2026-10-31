@@ -14,6 +14,12 @@ const polar = (angle, r) => {
   return { x: Math.cos(a) * r, y: Math.sin(a) * r }
 }
 
+// Resting layout, written into the SVG so the diagram is right without any
+// JS: reduced motion, small screens, or before GSAP loads.
+const REST_CIRCLE = 80
+const REST_LABEL = 250
+const translate = ({ x, y }) => `translate(${x.toFixed(2)} ${y.toFixed(2)})`
+
 // Three circles start far apart and slide together as you scroll. Where all
 // three overlap, a single word appears: voice.
 export default function ThreePillarsSection() {
@@ -29,17 +35,14 @@ export default function ThreePillarsSection() {
           motion: '(prefers-reduced-motion: no-preference)',
         },
         (context) => {
+          // GSAP only calls this when at least one condition matches, so a
+          // small screen with reduced motion never gets here. That case keeps
+          // the resting layout from the markup.
           const { desktop, motion } = context.conditions
+          if (!motion) return
           const circles = gsap.utils.toArray('.pl-circle')
           const labels = gsap.utils.toArray('.pl-label')
           const items = gsap.utils.toArray('.pl-item')
-
-          if (!motion) {
-            circles.forEach((c, i) => gsap.set(c, polar(pillars[i].angle, 80)))
-            labels.forEach((l, i) => gsap.set(l, polar(pillars[i].angle, 220)))
-            gsap.set('.pl-voice', { opacity: 1 })
-            return
-          }
 
           circles.forEach((c, i) => gsap.set(c, polar(pillars[i].angle, 175)))
           labels.forEach((l, i) => gsap.set(l, polar(pillars[i].angle, 175)))
@@ -89,7 +92,14 @@ export default function ThreePillarsSection() {
             <circle className="pl-ring" r="290" fill="none" stroke="#120D16" strokeOpacity="0.12" strokeDasharray="2 8" />
             <g className="pl-orbit">
               {pillars.map((p) => (
-                <circle key={p.title} className="pl-circle" r="130" fill={p.color} style={{ mixBlendMode: 'multiply' }} />
+                <circle
+                  key={p.title}
+                  className="pl-circle"
+                  r="130"
+                  fill={p.color}
+                  transform={translate(polar(p.angle, REST_CIRCLE))}
+                  style={{ mixBlendMode: 'multiply' }}
+                />
               ))}
             </g>
             <g className="pl-orbit-labels">
@@ -97,6 +107,7 @@ export default function ThreePillarsSection() {
                 <text
                   key={p.title}
                   className="pl-label font-mono"
+                  transform={translate(polar(p.angle, REST_LABEL))}
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fontSize="15"
@@ -107,7 +118,7 @@ export default function ThreePillarsSection() {
                 </text>
               ))}
             </g>
-            <text className="pl-voice font-display" textAnchor="middle" dominantBaseline="middle" fontSize="54" fontStyle="italic" fill="#F2ECE3" opacity="0">
+            <text className="pl-voice font-display" textAnchor="middle" dominantBaseline="middle" fontSize="54" fontStyle="italic" fill="#F2ECE3">
               voice
             </text>
           </svg>
