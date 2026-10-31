@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Women's Rights Guide",
+    "description": "A comprehensive guide to understand your rights as a woman in India. Covers constitutional rights, legal protections, and available remedies.",
+    "category": "Legal",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/womens-rights-guide.pdf",
+    "icon": "📄"
+  },
+  {
+    "id": 2,
+    "title": "Policy Advocacy Toolkit",
+    "description": "Step-by-step guide to engaging in policy advocacy and democratic participation. Includes templates and strategies for effective advocacy.",
+    "category": "Advocacy",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/policy-advocacy-toolkit.pdf",
+    "icon": "🛠️"
+  },
+  {
+    "id": 3,
+    "title": "Leadership Development Workbook",
+    "description": "Interactive workbook for developing leadership skills and community organizing. Features exercises, case studies, and reflection prompts.",
+    "category": "Training",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/leadership-workbook.pdf",
+    "icon": "📚"
+  },
+  {
+    "id": 4,
+    "title": "Research Report: Women in Politics",
+    "description": "Detailed research on women's representation in political institutions. Includes data visualization, analysis, and policy recommendations.",
+    "category": "Research",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/women-in-politics-report.pdf",
+    "icon": "📊"
+  },
+  {
+    "id": 5,
+    "title": "Harassment Laws Explained",
+    "description": "Understanding workplace and sexual harassment laws and how to file complaints. Covers legal frameworks and procedures.",
+    "category": "Legal",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/harassment-laws.pdf",
+    "icon": "⚖️"
+  },
+  {
+    "id": 6,
+    "title": "Community Organizing Guide",
+    "description": "Practical guide to grassroots organizing and community mobilization. Includes action planning templates and best practices.",
+    "category": "Advocacy",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/community-organizing.pdf",
+    "icon": "👥"
+  },
+  {
+    "id": 7,
+    "title": "Gender and Constitutional Rights",
+    "description": "Overview of constitutional provisions protecting women's rights. Includes case studies and jurisprudence analysis.",
+    "category": "Legal",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/constitutional-rights.pdf",
+    "icon": "📋"
+  },
+  {
+    "id": 8,
+    "title": "Youth Activism Handbook",
+    "description": "Guide for young activists to engage in social movements. Covers digital activism, offline organizing, and self-care.",
+    "category": "Training",
+    "type": "PDF",
+    "downloadUrl": "https://example.com/youth-activism.pdf",
+    "icon": "✊"
+  }
+]
