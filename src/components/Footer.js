@@ -1,132 +1,164 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { gsap, useGSAP } from '@/lib/gsap'
 import ContactForm from './Contact/ContactForm'
+import RollText from './Motion/RollText'
+import Chars from './Motion/Chars'
+
+const explore = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/publications', label: 'Blogs' },
+  { href: '/initiatives', label: 'Initiatives' },
+  { href: '/resources', label: 'Resources' },
+]
+
+const more = [
+  { href: '/our-work', label: 'Our Work' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/donations', label: 'Donate' },
+  { href: '/members', label: 'Members' },
+  { href: '/maintenance', label: 'Maintenance' },
+  { href: '/terms', label: 'Terms' },
+  { href: '/privacy', label: 'Privacy' },
+]
+
+const socials = [
+  { href: 'https://www.instagram.com/project.cornelia/', label: 'Instagram' },
+  { href: 'https://www.linkedin.com/company/project-cornelia/?originalSubdomain=in', label: 'LinkedIn' },
+]
+
+function IstClock() {
+  const [time, setTime] = useState('')
+  useEffect(() => {
+    const fmt = () =>
+      new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })
+    setTime(fmt())
+    const id = setInterval(() => setTime(fmt()), 1000)
+    return () => clearInterval(id)
+  }, [])
+  return <span suppressHydrationWarning>{time} IST</span>
+}
 
 export default function Footer() {
+  const root = useRef(null)
   const currentYear = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', year: 'numeric' })
 
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(
+          '.wordmark .char',
+          { yPercent: 100, '--wght': 100 },
+          {
+            yPercent: 0,
+            '--wght': 700,
+            stagger: { each: 0.05, from: 'center' },
+            duration: 1.6,
+            ease: 'expo.out',
+            scrollTrigger: { trigger: '.wordmark', start: 'top 95%' },
+          }
+        )
+        gsap.from('.ft-inner', {
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: { trigger: root.current, start: 'top bottom', end: 'top 30%', scrub: true },
+        })
+      })
+      return () => mm.revert()
+    },
+    { scope: root }
+  )
+
+  const toTop = () => {
+    if (window.__lenis) window.__lenis.scrollTo(0, { duration: 2 })
+    else window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <footer className="w-full bg-neutral-900 text-neutral-100 border-t border-on-secondary-fixed-variant">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-gutter py-12 md:py-16">
-        {/* Brand & Info */}
-        <div className="space-y-4">
-          <div className="font-headline-md text-headline-md font-bold text-neutral-100 flex items-center gap-3">
-            <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center p-1.5">
-              <Image
-                src="/images/p_cornelia_logo.png"
-                alt="Cornelia Logo"
-                width={40}
-                height={40}
-                className="h-20 w-20 object-contain"
-              />
+    <footer ref={root} className="relative w-full bg-ink text-bone overflow-hidden">
+      <div className="ft-inner px-5 md:px-10 pt-24 md:pt-32">
+        <div className="grid lg:grid-cols-12 gap-14">
+          <div className="lg:col-span-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-bone/50 mb-6">Get in touch</p>
+            <p className="font-display text-[clamp(2.4rem,5vw,5rem)] leading-[0.95] tracking-[-0.03em]">
+              Every conversation <br />
+              <span className="italic-wonk text-flare">starts with hello.</span>
+            </p>
+            <a
+              href="mailto:contact.projectcornelia@gmail.com"
+              className="inline-block mt-8 font-sans text-lg md:text-2xl link-underline"
+            >
+              contact.projectcornelia@gmail.com
+            </a>
+          </div>
+          <div className="lg:col-span-5 lg:col-start-8">
+            <ContactForm variant="footer" />
+          </div>
+        </div>
+
+        <div className="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-4 gap-10 font-mono text-xs uppercase tracking-[0.14em]">
+          <nav aria-label="Footer: explore">
+            <p className="text-bone/40 mb-5">Explore</p>
+            <ul className="space-y-3">
+              {explore.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-flare transition-colors">
+                    <RollText>{l.label}</RollText>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-label="Footer: more">
+            <p className="text-bone/40 mb-5">More</p>
+            <ul className="space-y-3">
+              {more.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-flare transition-colors">
+                    <RollText>{l.label}</RollText>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div>
+            <p className="text-bone/40 mb-5">Follow</p>
+            <ul className="space-y-3">
+              {socials.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-flare transition-colors">
+                    <RollText>{s.label}</RollText> <span aria-hidden="true">&#8599;</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex flex-col justify-between gap-6">
+            <div>
+              <p className="text-bone/40 mb-5">Local time</p>
+              <IstClock />
             </div>
-            Project Cornelia
+            <button onClick={toTop} className="group self-start inline-flex items-center gap-3 uppercase">
+              <span className="w-10 h-10 rounded-full border border-bone/40 grid place-items-center transition-transform duration-500 group-hover:-translate-y-1 group-hover:bg-flare group-hover:border-flare group-hover:text-ink">&uarr;</span>
+              <RollText>Back to top</RollText>
+            </button>
           </div>
-          <p className="font-body-md text-body-md text-neutral-100/70">
-            Empowering women and youth through law, policy, and democratic participation.
-          </p>
-            <div className="flex items-center gap-4 mt-4">
-            <a href="https://www.instagram.com/project.cornelia/" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
-              <Image
-                src="/images/instagram.svg"
-                alt="Instagram"
-                width={40}
-                height={40}
-                className="w-10 h-10"
-              />
-            </a>
-            <a href="https://www.linkedin.com/company/project-cornelia/?originalSubdomain=in" target="_blank" rel="noopener noreferrer" className="text-neutral-100/60 hover:text-white transition-colors">
-              <Image
-                src="/images/linkedin.svg"
-                alt="LinkedIn"
-                width={40}
-                height={40}
-                className="w-10 h-10"
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* Links */}
-        <div>
-          <h4 className="font-headline-sm text-headline-sm mb-6">Navigation</h4>
-          <ul className="space-y-3 text-sm">
-            {/* <li>
-              <Link href="/" className="text-neutral-100/70">
-                Home
-              </Link>
-            </li> */}
-            {/* <li>
-              <Link href="/about" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                About
-              </Link>
-            </li> */}
-            {/* <li>
-              <Link href="/publications" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Publications
-              </Link>
-            </li> */}
-            {/* <li>
-              <Link href="/initiatives" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Initiatives
-              </Link>
-            </li> */}
-            {/* <li>
-              <Link href="/resources" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Resources
-              </Link>
-            </li> */}
-            <li>
-              <Link href="/our-work" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Our Work
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="/donations" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Donate
-              </Link>
-            </li>
-            <li>
-              <Link href="/members" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Members
-              </Link>
-            </li>
-            <li>
-              <Link href="/maintenance" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Maintenance
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Terms
-              </Link>
-            </li>
-            <li>
-              <Link href="/privacy" className="text-neutral-100/70 hover:text-neutral-100 transition-opacity duration-300">
-                Privacy
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Contact Form */}
-        <div>
-          <h4 className="font-headline-sm text-headline-sm mb-6">Get in Touch</h4>
-          <ContactForm variant="footer" />
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-gutter py-6 border-t border-on-secondary-fixed-variant/20 text-center md:text-left">
-        <p className="font-body-sm text-body-sm text-neutral-100/50">
-          © {currentYear} Project Cornelia. All rights reserved.
+      <div className="mt-16 px-3 md:px-6" aria-hidden="true">
+        <p className="wordmark font-display text-center leading-[0.78] tracking-[-0.06em] text-[24.5vw] overflow-hidden text-bone">
+          <Chars text="Cornelia" />
         </p>
+      </div>
+
+      <div className="px-5 md:px-10 py-6 border-t border-bone/10 flex flex-col md:flex-row justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.14em] text-bone/40">
+        <p>&copy; {currentYear} Project Cornelia &middot; AINA Foundation. All rights reserved.</p>
+        <p>Collective &middot; Criticism &middot; Conversation</p>
       </div>
     </footer>
   )

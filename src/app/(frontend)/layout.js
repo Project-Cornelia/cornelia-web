@@ -1,4 +1,28 @@
 import './globals.css'
+import { Fraunces, Inter_Tight, JetBrains_Mono } from 'next/font/google'
+import SmoothScroll from '@/components/Motion/SmoothScroll'
+import Cursor from '@/components/Motion/Cursor'
+
+const display = Fraunces({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  axes: ['SOFT', 'WONK', 'opsz'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const sans = Inter_Tight({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'Home | Project Cornelia AINA Foundation',
@@ -12,18 +36,18 @@ export const metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#120D16',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-surface text-on-surface">{children}</body>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <body className="bg-surface text-on-surface font-sans">
+        <SmoothScroll />
+        <Cursor />
+        <div className="grain" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   )
 }
