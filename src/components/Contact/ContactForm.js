@@ -8,6 +8,7 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
     email: '',
     subject: '',
     message: '',
+    website: '',
   })
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
@@ -29,6 +30,7 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
         name: formData.name,
         email: formData.email,
         message: formData.message,
+        website: formData.website,
       }
 
       // Include subject only if it's provided (full form variant)
@@ -49,7 +51,7 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
       }
 
       setSubmitted(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' })
       
       if (onSuccess) {
         onSuccess()
@@ -77,6 +79,16 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
   if (variant === 'footer') {
     return (
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="hidden" aria-hidden="true">
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
         <div>
           <label className={footerLabelClass}>Name</label>
           <div className="border-b border-neutral-100/30">
@@ -153,6 +165,16 @@ export default function ContactForm({ variant = 'full', onSuccess }) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="hidden" aria-hidden="true">
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
         <div>
           <label htmlFor="name" className="block font-label-lg text-label-lg text-on-surface-variant mb-2">
             Full Name

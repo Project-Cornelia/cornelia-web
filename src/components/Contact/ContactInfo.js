@@ -18,7 +18,7 @@ export default function ContactInfo() {
                 <div>
                   <h3 className="font-label-lg text-label-lg text-primary uppercase tracking-widest mb-2">Location</h3>
                   <p className="font-body-md text-body-md text-on-surface-variant">
-                    Delhi University<br />New Delhi, India
+                    Lucknow<br />Uttar Pradesh, India
                   </p>
                 </div>
 
@@ -47,7 +47,7 @@ export default function ContactInfo() {
                 <div className="bg-surface-container border border-neutral-100 rounded-xl p-6">
                   <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">Response Time</h3>
                   <p className="font-body-sm text-body-sm text-on-surface-variant">
-                    We typically respond within 2–3 business days.
+                    We typically respond within 6–7 days.
                   </p>
                 </div>
               </div>

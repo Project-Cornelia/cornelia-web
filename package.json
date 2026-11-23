@@ -7,8 +7,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "pnpm run test:int && pnpm run test:e2e",
     "generate:importmap": "payload generate:importmap"
   },
   "dependencies": {

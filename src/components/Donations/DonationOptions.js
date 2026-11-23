@@ -1,7 +1,6 @@
 'use client'
 
 import DonationComponent1 from './DonationComponent1'
-import DonationComponent2 from './DonationComponent2'
 
 export default function DonationOptions() {
     return (
@@ -18,7 +17,6 @@ export default function DonationOptions() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
               <DonationComponent1 />
-              <DonationComponent2 />
             </div>
           </div>
         </section>

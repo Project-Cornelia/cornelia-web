@@ -11,13 +11,27 @@ export default buildConfig({
   collections: [
     {
       slug: 'users',
-      auth: true,
+      auth: {
+        cookies: {
+          secure: process.env.NODE_ENV === 'production',
+        },
+      },
       admin: { useAsTitle: 'email' },
       fields: [],
     },
     {
       slug: 'publications',
-      admin: { useAsTitle: 'title' },
+      labels: {
+        singular: 'Article / Report',
+        plural: 'Articles & Reports',
+      },
+      admin: {
+        useAsTitle: 'title',
+        group: 'Resources',
+        defaultColumns: ['title', 'category', 'date', 'author'],
+        description:
+          'Choose "From Our Desk (Blog)" for essays and updates, or "Research Report"/"Research Article" for research content.',
+      },
       fields: [
         { name: 'title', type: 'text', required: true },
         { name: 'slug', type: 'text', required: true, unique: true },
@@ -25,7 +39,12 @@ export default buildConfig({
           name: 'category',
           type: 'select',
           required: true,
-          options: ['Blogs', 'Reports', 'Research'],
+          defaultValue: 'Blogs',
+          options: [
+            { label: 'From Our Desk (Blog)', value: 'Blogs' },
+            { label: 'Research Report', value: 'Reports' },
+            { label: 'Research Article', value: 'Research' },
+          ],
         },
         {
           name: 'tags',
@@ -50,7 +69,15 @@ export default buildConfig({
     },
     {
       slug: 'resources',
-      admin: { useAsTitle: 'title' },
+      labels: {
+        singular: 'Toolkit',
+        plural: 'Toolkits',
+      },
+      admin: {
+        useAsTitle: 'title',
+        group: 'Resources',
+        description: 'Shown under the "Toolkits" submenu on the Resources page.',
+      },
       fields: [
         { name: 'title', type: 'text', required: true },
         { name: 'description', type: 'textarea', required: true },
@@ -91,7 +118,16 @@ export default buildConfig({
     },
     {
       slug: 'initiatives',
-      admin: { useAsTitle: 'title' },
+      labels: {
+        singular: 'Initiative / Event',
+        plural: 'Initiatives & Events',
+      },
+      admin: {
+        useAsTitle: 'title',
+        defaultColumns: ['title', 'category', 'status', 'order'],
+        description:
+          'Each initiative has a card intro, an at-a-glance summary, and a long-form description. Initiatives are shown in one combined list.',
+      },
       fields: [
         { name: 'title', type: 'text', required: true },
         {
@@ -104,14 +140,64 @@ export default buildConfig({
           type: 'text',
           required: true,
         },
-        { name: 'description', type: 'textarea', required: true },
-        { name: 'fullDescription', type: 'textarea' },
-        { name: 'impact', type: 'text' },
+        {
+          name: 'description',
+          type: 'textarea',
+          label: 'Intro',
+          required: true,
+          admin: {
+            description:
+              'Introduction shown on the collapsed card and as the lead of the expanded article. Any length.',
+          },
+        },
+        {
+          name: 'atAGlance',
+          type: 'array',
+          label: 'At a glance',
+          labels: {
+            singular: 'Stat',
+            plural: 'Stats',
+          },
+          admin: {
+            description:
+              'Key numbers shown as tiles. Example: value "11", label "lectures and talks". The first four show on the card.',
+          },
+          fields: [
+            { name: 'value', type: 'text', required: true, admin: { description: 'e.g., 11, ~300, 2021–2026' } },
+            { name: 'label', type: 'text', required: true, admin: { description: 'e.g., lectures and talks' } },
+          ],
+        },
+        {
+          name: 'content',
+          type: 'richText',
+          label: 'Description',
+          admin: {
+            description:
+              'Full blog-style write-up shown when the card is expanded. Supports headings, lists, quotes, links, and formatting. No images yet.',
+          },
+        },
+        {
+          name: 'fullDescription',
+          type: 'textarea',
+          label: 'Legacy full description',
+          admin: {
+            description: 'Plain-text fallback used only when Description is empty.',
+          },
+        },
+        {
+          name: 'impact',
+          type: 'text',
+          admin: { description: 'Short result or highlight shown on the card and in the expanded view.' },
+        },
         {
           name: 'status',
           type: 'select',
           options: ['Active', 'Ongoing', 'Completed', 'Planned'],
           defaultValue: 'Active',
+          admin: {
+            description:
+              'Displayed as a status badge. Initiatives are no longer split into Ongoing and Past sections.',
+          },
         },
         { name: 'order', type: 'number', admin: { description: 'Display order' } },
       ],
@@ -148,7 +234,24 @@ export default buildConfig({
         { name: 'email', type: 'text', required: true },
         { name: 'subject', type: 'text', required: false },
         { name: 'message', type: 'textarea', required: true },
+        {
+          name: 'website',
+          type: 'text',
+          required: false,
+          admin: { hidden: true },
+        },
       ],
+      hooks: {
+        beforeChange: [
+          ({ data, operation }) => {
+            // Honeypot field: humans never fill it, bots do.
+            if (operation === 'create' && data?.website) {
+              throw new Error('Spam detected')
+            }
+            return data
+          },
+        ],
+      },
       timestamps: true, // Automatically logs the exact date and time it was sent
     }
   ],

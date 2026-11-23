@@ -3,6 +3,7 @@ import { readFile } from 'fs/promises'
 import { join } from 'path'
 import config from '@/payload.config.js'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
+import { getPublicationSection } from './resourceSections.js'
 
 async function getPayloadInstance() {
   return await getPayload({ config })
@@ -29,21 +30,21 @@ function resolveImageUrl(image) {
   return null
 }
 
+function contentToHTML(content) {
+  if (typeof content === 'string') return content
+  if (Array.isArray(content)) return content.map(p => `<p>${p}</p>`).join('\n')
+  if (content && typeof content === 'object') return lexicalToHTML(content)
+  return ''
+}
+
 function normalizePublication(doc) {
-  const content = doc.content
-  let html = ''
-  if (typeof content === 'string') {
-    html = content
-  } else if (Array.isArray(content)) {
-    html = content.map(p => `<p>${p}</p>`).join('\n')
-  } else if (content && typeof content === 'object') {
-    html = lexicalToHTML(content)
-  }
+  const html = contentToHTML(doc.content)
   return {
     id: doc.id,
     slug: doc.slug,
     title: doc.title,
     category: doc.category ?? '',
+    section: getPublicationSection(doc.category),
     tags: Array.isArray(doc.tags)
       ? doc.tags.map(t => (typeof t === 'string' ? t : t.tag)).filter(Boolean)
       : [],
@@ -60,7 +61,7 @@ function normalizeResource(doc) {
     id: doc.id,
     title: doc.title,
     description: doc.description ?? '',
-    emoji: doc.emoji ?? null,
+    emoji: doc.emoji ?? doc.icon ?? null,
     category: doc.category ?? '',
     type: doc.type ?? '',
     downloadUrl: doc.downloadUrl ?? '#',
@@ -74,6 +75,12 @@ function normalizeInitiative(doc) {
     emoji: doc.emoji ?? null,
     category: doc.category ?? '',
     description: doc.description ?? '',
+    atAGlance: Array.isArray(doc.atAGlance)
+      ? doc.atAGlance
+          .map(stat => ({ value: stat.value ?? '', label: stat.label ?? '' }))
+          .filter(stat => stat.value || stat.label)
+      : [],
+    content: contentToHTML(doc.content),
     fullDescription: doc.fullDescription ?? '',
     impact: doc.impact ?? '',
     status: doc.status ?? 'Active',
@@ -115,12 +122,20 @@ export async function getPublicationBySlug(slug) {
       where: { slug: { equals: slug } },
       limit: 1,
     })
-    if (docs.length === 0) {
-      const all = await readJSON('publications.json')
-      const found = all.find(p => p.slug === slug)
-      return found ? normalizePublication(found) : null
+
+    if (docs.length > 0) {
+      return normalizePublication(docs[0])
     }
-    return normalizePublication(docs[0])
+
+    // Only use the static seed data while the CMS collection is empty.
+    const { totalDocs } = await payload.count({ collection: 'publications' })
+    if (totalDocs > 0) {
+      return null
+    }
+
+    const all = await readJSON('publications.json')
+    const found = all.find(p => p.slug === slug)
+    return found ? normalizePublication(found) : null
   } catch {
     const all = await readJSON('publications.json')
     const found = all.find(p => p.slug === slug)
@@ -135,10 +150,10 @@ export async function getResources() {
       collection: 'resources',
       limit: 200,
     })
-    if (totalDocs === 0) return readJSON('resources.json')
+    if (totalDocs === 0) return readJSON('resources.json').then(d => d.map(normalizeResource))
     return docs.map(normalizeResource)
   } catch {
-    return readJSON('resources.json')
+    return readJSON('resources.json').then(d => d.map(normalizeResource))
   }
 }
 

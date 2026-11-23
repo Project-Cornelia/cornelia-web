@@ -1,26 +1,34 @@
 'use client'
 
-export default function ResourcesCat({ categories = [], activeCategory, setActiveCategory }) {
+export default function ResourcesFilter({
+  label = 'Filter By',
+  options = [],
+  value,
+  onChange,
+  className = '',
+}) {
+  if (options.length <= 1 && options[0] === 'All') return null
+
   return (
-    <section className="bg-surface-container-lowest top-20 z-40 py-6 border-y border-neutral-100">
-        <div className="max-w-7xl mx-auto px-gutter flex items-center gap-4 overflow-x-auto">
-          <span className="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest mr-4 whitespace-nowrap">
-            Filter By:
-          </span>
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-2 rounded-full font-label-md text-label-md whitespace-nowrap transition-all duration-300 ${
-                activeCategory === cat
-                  ? 'bg-neutral-900 text-neutral-50'
-                  : 'bg-transparent border border-neutral-100 hover:border-primary hover:text-primary'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
+    <div className={`flex items-center gap-3 overflow-x-auto ${className}`}>
+      <span className="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest mr-2 whitespace-nowrap">
+        {label}
+      </span>
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          onClick={() => onChange(option)}
+          aria-pressed={value === option}
+          className={`px-5 py-2 rounded-full font-label-md text-label-md whitespace-nowrap transition-all duration-300 ${
+            value === option
+              ? 'bg-neutral-900 text-neutral-50'
+              : 'bg-transparent border border-neutral-100 hover:border-primary hover:text-primary'
+          }`}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
   )
 }
