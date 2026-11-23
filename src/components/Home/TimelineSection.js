@@ -24,10 +24,12 @@ export default function TimelineSection() {
   }, [])
 
   const milestones = [
-    { year: '2020', text: 'The Movement Begins as a university-based advocacy group.' },
-    { year: '2021', text: 'Published first collective manifesto on gender equity in policy.' },
-    { year: '2022', text: 'Launched the Three Pillars initiative across five major cities.' },
-    { year: '2023', text: 'Recognized as a leading national voice in democratic participation.' },
+    { year: '2021', text: 'Started as a student club at Delhi University.' },
+    { year: '2022', text: 'Raised funds for acid attack survivors with Chhanv Foundation; set up libraries in Kashmir with SABIA.' },
+    { year: '2023', text: "Shifted to grassroots work, putting women at the center of decision-making." },
+    { year: '2024', text: 'Became a registered Trust and published The Constitution Land.' },
+    { year: '2025', text: "Presented in Vienna and partnered with Central European University." },
+    { year: '2026', text: 'Opened our virtual chapter in Nepal.' },
   ]
 
   return (
@@ -38,7 +40,7 @@ export default function TimelineSection() {
             Our Story
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant">
-            Born as a student-led movement, growing into a national women's collective.
+            Born as a student-led movement, growing into an international women's collective.
           </p>
         </div>
 

@@ -4,7 +4,10 @@
     "slug": "economic-parity",
     "title": "Economic Parity in the Post-Digital Age",
     "category": "Research",
-    "tags": ["publication", "research"],
+    "tags": [
+      "research",
+      "economy"
+    ],
     "date": "OCT 30, 2025",
     "author": "Cornelia Team",
     "excerpt": "A comprehensive analysis of workforce shifts and the evolving barriers to female financial autonomy in emerging markets. This report explores systemic shifts required for true equity.",
@@ -19,8 +22,11 @@
     "id": 2,
     "slug": "matriarchal-legacy",
     "title": "The Matriarchal Legacy of the Deccan",
-    "category": "Case Study",
-    "tags": ["publication", "research"],
+    "category": "Research",
+    "tags": [
+      "research",
+      "history"
+    ],
     "date": "OCT 25, 2025",
     "author": "Cornelia Team",
     "excerpt": "Tracing historical matrilineal structures through rediscovered oral traditions.",
@@ -35,8 +41,11 @@
     "id": 3,
     "slug": "digital-literacy",
     "title": "Digital Literacy as Human Right",
-    "category": "Policy Paper",
-    "tags": ["publication", "policy"],
+    "category": "Reports",
+    "tags": [
+      "policy",
+      "digital"
+    ],
     "date": "OCT 20, 2025",
     "author": "Cornelia Team",
     "excerpt": "Why bridging the gendered tech divide is the most critical intervention for the next decade.",
@@ -51,8 +60,11 @@
     "id": 4,
     "slug": "archives-discovered-goa",
     "title": "Redefining the Narrative: New Archives Discovered in Goa",
-    "category": "News",
-    "tags": ["publication", "news"],
+    "category": "Blogs",
+    "tags": [
+      "news",
+      "archives"
+    ],
     "date": "OCT 24, 2025",
     "author": "Cornelia Team",
     "excerpt": "Researchers have unearthed a significant collection of letters and manuscripts dating back to the 18th century, offering unprecedented insights into the social standing and property rights of women in coastal communities during the transition to colonial rule.",
@@ -67,8 +79,11 @@
     "id": 5,
     "slug": "care-economy-policy",
     "title": "Policy Brief: Addressing the Invisible Care Economy",
-    "category": "News",
-    "tags": ["publication", "policy"],
+    "category": "Reports",
+    "tags": [
+      "policy",
+      "care-economy"
+    ],
     "date": "OCT 12, 2025",
     "author": "Cornelia Team",
     "excerpt": "Our latest data-driven brief quantifies the unpaid labor market and provides a framework for integrating care-work recognition into national GDP calculations, a move supported by major economic activists.",
@@ -83,8 +98,11 @@
     "id": 6,
     "slug": "historical-voices-symposium",
     "title": "Annual Symposium: Reclaiming Historical Voices",
-    "category": "News",
-    "tags": ["publication", "events"],
+    "category": "Blogs",
+    "tags": [
+      "events",
+      "archives"
+    ],
     "date": "SEPT 28, 2025",
     "author": "Cornelia Team",
     "excerpt": "A recap of our flagship event where scholars from twelve countries gathered to discuss the methodology of reading against the grain in official archives to find the silenced narratives of women.",
@@ -99,8 +117,11 @@
     "id": 7,
     "slug": "women-policy-making",
     "title": "The Power of Women in Policy Making",
-    "category": "Blog",
-    "tags": ["blog", "policy"],
+    "category": "Blogs",
+    "tags": [
+      "policy",
+      "leadership"
+    ],
     "date": "March 15, 2024",
     "author": "Cornelia Team",
     "excerpt": "Exploring how women's participation in policy discussions can lead to more inclusive and effective governance.",
@@ -115,8 +136,10 @@
     "id": 8,
     "slug": "amplifying-marginalized-voices",
     "title": "Amplifying Marginalized Voices",
-    "category": "Blog",
-    "tags": ["blog", "advocacy"],
+    "category": "Blogs",
+    "tags": [
+      "advocacy"
+    ],
     "date": "March 10, 2024",
     "author": "Cornelia Team",
     "excerpt": "A deep dive into our initiatives aimed at bringing marginalized communities into the center of democratic conversations.",
@@ -131,8 +154,11 @@
     "id": 9,
     "slug": "student-leadership-social-change",
     "title": "Student Leadership in Social Change",
-    "category": "Blog",
-    "tags": ["blog", "leadership"],
+    "category": "Blogs",
+    "tags": [
+      "leadership",
+      "youth"
+    ],
     "date": "March 5, 2024",
     "author": "Guest Author",
     "excerpt": "How student-led initiatives like Cornelia are driving meaningful social and policy change in their communities.",
@@ -147,8 +173,10 @@
     "id": 10,
     "slug": "community-dialogue",
     "title": "Building Community Through Dialogue",
-    "category": "Blog",
-    "tags": ["blog", "community"],
+    "category": "Blogs",
+    "tags": [
+      "community"
+    ],
     "date": "February 28, 2024",
     "author": "Cornelia Team",
     "excerpt": "The importance of creating safe spaces for conversations and how it strengthens community bonds.",
@@ -163,8 +191,11 @@
     "id": 11,
     "slug": "acid-attack-survivors",
     "title": "Supporting Acid Attack Survivors",
-    "category": "Blog",
-    "tags": ["blog", "fundraising"],
+    "category": "Blogs",
+    "tags": [
+      "fundraising",
+      "survivors"
+    ],
     "date": "February 20, 2024",
     "author": "Cornelia Team",
     "excerpt": "Our fundraising initiatives and the broader work being done to support and empower acid attack survivors.",
@@ -179,8 +210,11 @@
     "id": 12,
     "slug": "democracy-needs-women",
     "title": "Democracy Needs Women's Voices",
-    "category": "Blog",
-    "tags": ["blog", "gender-equality"],
+    "category": "Blogs",
+    "tags": [
+      "gender-equality",
+      "democracy"
+    ],
     "date": "February 15, 2024",
     "author": "Guest Author",
     "excerpt": "Why gender equality in democratic participation is essential for building a stronger, more equitable society.",

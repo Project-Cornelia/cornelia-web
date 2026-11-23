@@ -1,9 +1,14 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Home | Project Cornelia AINA Foundation',
-  description: 'Making every woman\'s voice central to all conversations that matter',
-  charset: 'utf-8',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://projectcornelia.org'),
+  title: 'Project Cornelia AINA Foundation',
+  description: "Making every woman's voice central to all conversations that matter",
+  openGraph: {
+    title: 'Project Cornelia AINA Foundation',
+    description: "Making every woman's voice central to all conversations that matter",
+    type: 'website',
+  },
   icons: {
     icon: '/images/p_cornelia_logo.svg',
   },

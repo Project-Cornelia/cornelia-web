@@ -6,15 +6,17 @@ export default function ArticleContent({ imageUrl, children, content }) {
   return (
     <>
       {/* Main Media Canvas */}
-      <div className="w-full mb-20 overflow-hidden">
-        <Image
-          src={imageUrl || 'https://lh3.googleusercontent.com/aida/ADBb0ujMSMJzCwgJbbzZOlDA_6vbPYTrt9VIiMLVv7MrDeF5_A4-idE0-h6l7Fc1VRP_iy7iqcC61WYzpvTxbWLKZhGizab7D9ehtzN9RwC-S6CAcC1TwSOiYMPR2D_qimAUtc1NZx0DbN0sx504YzGCcJri_28_Y9zyxEjsu0wiGNO209wSUM5BQL5-qQwQeES1CW9cTb4crMLunK1pI_-ykfMHVnYDH_1Jv1rnGd1VxKob6ksdmNaUzejenpI'}
-          alt="Article content"
-          width={1400}
-          height={700}
-          className="w-full h-auto object-cover max-h-[40vh] md:max-h-[80vh]"
-        />
-      </div>
+      {imageUrl && (
+        <div className="w-full mb-20 overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt="Article content"
+            width={1400}
+            height={700}
+            className="w-full h-auto object-cover max-h-[40vh] md:max-h-[80vh]"
+          />
+        </div>
+      )}
 
       {/* Prose Container */}
       <article className="max-w-3xl mx-auto px-gutter prose-container">

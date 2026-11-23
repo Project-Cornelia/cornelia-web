@@ -1,8 +1,5 @@
 'use client'
 
-import Link from 'next/link'
-
-
 export default function Maintenance() {
   return (
         
@@ -12,10 +9,10 @@ export default function Maintenance() {
         {/* { logo} */}
         <div className="flex justify-center mb-8">
           <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center overflow-hidden">
-            <img 
-              src="/images/cornelia_logo.png"  // Path relative to the public folder
-              alt="Project Cornelia Logo" 
-              className="w-full h-full object-contain p-2" 
+            <img
+              src="/images/p_cornelia_logo.png"
+              alt="Project Cornelia Logo"
+              className="w-full h-full object-contain p-2"
             />
           </div>
         </div>

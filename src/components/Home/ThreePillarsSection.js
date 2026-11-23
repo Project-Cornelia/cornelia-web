@@ -24,9 +24,9 @@ export default function ThreePillarsSection() {
   }, [])
 
   const pillars = [
-    { title: 'Collective', description: 'Building alliances of women leaders.' },
-    { title: 'Criticism', description: 'Challenging inequity through policy.' },
-    { title: 'Conversation', description: 'Driving dialogue in public spaces.' },
+    { title: 'Collective Action', description: 'Change isn’t achieved alone. We collaborate so every woman’s voice is heard.' },
+    { title: 'Conversational Discourse', description: 'Dialogue is how awareness spreads. We put conversation at the center of our mission.' },
+    { title: 'Critical Outlook', description: 'Questioning builds a just society. We learn to challenge the world around us, together.' },
   ]
 
   return (

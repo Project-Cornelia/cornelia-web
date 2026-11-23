@@ -13,7 +13,7 @@ export default function ContactFAQ() {
                             { q: 'How can I get involved?', a: 'Fill out our "Work with us" form on the Get Involved page to explore collaboration opportunities.' },
                             { q: 'How can I contribute financially?', a: 'Donate through our Milaap fundraiser page which supports acid attack survivors.' },
                             { q: 'Can I write for your blog?', a: 'Yes! Fill out our "Write for us" form and share your insights on women, law, and policy.' },
-                            { q: 'How often do you respond?', a: 'We aim to respond to all inquiries within 2–3 business days.' },
+                            { q: 'How often do you respond?', a: 'We aim to respond to all inquiries within 6–7 days.' },
                         ].map(({ q, a }) => (
                             <div key={q} className="bg-surface border border-neutral-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                             <h3 className="font-headline-sm text-headline-sm text-on-surface mb-3">{q}</h3>

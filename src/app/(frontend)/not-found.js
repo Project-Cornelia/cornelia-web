@@ -53,12 +53,6 @@ export default function NotFound() {
                 Our Work
               </Link>
               <Link
-                href="/blog"
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                Blog
-              </Link>
-              <Link
                 href="/initiatives"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
               >
