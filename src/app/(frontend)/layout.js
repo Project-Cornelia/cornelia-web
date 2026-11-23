@@ -1,4 +1,9 @@
+import { LinkrunnerScript } from '@linkrunner/web/next'
 import './globals.css'
+
+// Linkrunner Web SDK token (Linkrunner dashboard > Settings > Project Details). The SDK is
+// skipped when it is unset, so local and preview builds send no events.
+const linkrunnerToken = process.env.NEXT_PUBLIC_LINKRUNNER_WEB_TOKEN?.trim()
 
 export const metadata = {
   title: 'Home | Project Cornelia AINA Foundation',
@@ -23,7 +28,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="bg-surface text-on-surface">{children}</body>
+      <body className="bg-surface text-on-surface">
+        {children}
+        {linkrunnerToken && <LinkrunnerScript token={linkrunnerToken} />}
+      </body>
     </html>
   )
 }

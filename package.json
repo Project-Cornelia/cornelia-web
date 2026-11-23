@@ -12,6 +12,7 @@
     "generate:importmap": "payload generate:importmap"
   },
   "dependencies": {
+    "@linkrunner/web": "0.1.17",
     "@payloadcms/db-sqlite": "^3.85.0",
     "@payloadcms/next": "^3.85.0",
     "@payloadcms/plugin-cloud-storage": "^3.85.0",
