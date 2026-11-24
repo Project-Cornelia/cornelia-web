@@ -167,7 +167,7 @@ export default function ArticlesSection({
         )}
       </section>
 
-      {showWriteForUs && <WriteForUs />}
+      {/* {showWriteForUs && <WriteForUs />} */}
     </>
   )
 }
