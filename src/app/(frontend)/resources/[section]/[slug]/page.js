@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ArticleHero from '@/components/Article/ArticleHero'
 import ArticleContent from '@/components/Article/ArticleContent'
+import ResearchReport from '@/components/Article/ResearchReport'
 import RelatedArticles from '@/components/Article/RelatedArticles'
 import { getPublicationBySlug, getPublications } from '@/lib/cms'
 import { RESOURCE_SECTION_KEYS } from '@/lib/resourceSections'
@@ -56,9 +57,14 @@ export default async function ResourceArticlePage({ params }) {
     <>
       <Header />
       <main className="pt-44 pb-section-padding-desktop bg-surface">
-        <ArticleHero title={article.title} author={article.author} date={article.date} />
-
-        <ArticleContent imageUrl={article.image} content={article.content} />
+        {article.section === 'research-reports' ? (
+          <ResearchReport article={article} />
+        ) : (
+          <>
+            <ArticleHero title={article.title} author={article.author} date={article.date} />
+            <ArticleContent imageUrl={article.image} content={article.content} />
+          </>
+        )}
 
         {relatedPublications.length > 0 && <RelatedArticles articles={relatedPublications} />}
       </main>

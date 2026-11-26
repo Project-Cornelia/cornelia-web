@@ -34,6 +34,13 @@ export default buildConfig({
       },
       fields: [
         { name: 'title', type: 'text', required: true },
+        {
+          name: 'subtitle',
+          type: 'text',
+          admin: {
+            description: 'Optional full or secondary title shown under the main title.',
+          },
+        },
         { name: 'slug', type: 'text', required: true, unique: true },
         {
           name: 'category',
@@ -52,8 +59,46 @@ export default buildConfig({
           fields: [{ name: 'tag', type: 'text' }],
         },
         { name: 'date', type: 'date', required: true },
-        { name: 'author', type: 'text', required: true },
+        {
+          name: 'author',
+          type: 'text',
+          admin: {
+            description: 'Used for blogs. Research reports use the Authors field below instead.',
+          },
+        },
+        {
+          name: 'authors',
+          type: 'array',
+          label: 'Authors',
+          labels: {
+            singular: 'Author',
+            plural: 'Authors',
+          },
+          admin: {
+            description: 'Used for research reports: list each author with a short bio.',
+          },
+          fields: [
+            { name: 'name', type: 'text', required: true },
+            { name: 'bio', type: 'textarea' },
+          ],
+        },
         { name: 'excerpt', type: 'textarea', required: true },
+        {
+          name: 'pdfUrl',
+          type: 'text',
+          admin: {
+            description:
+              'External link to the full PDF (e.g., a Google Drive public share link). Shown for research reports.',
+          },
+        },
+        {
+          name: 'aiNote',
+          type: 'textarea',
+          admin: {
+            description:
+              'Optional disclosure note, e.g., "AI was used in this research paper for proofreading, finding sources, and aligning ideas."',
+          },
+        },
         {
           name: 'image',
           type: 'upload',
@@ -62,8 +107,11 @@ export default buildConfig({
         {
           name: 'content',
           type: 'richText',
-          required: true,
           editor: lexicalEditor(),
+          admin: {
+            description:
+              'Blog body. Research reports may leave this empty; they use the abstract (excerpt), PDF link, and authors instead.',
+          },
         },
       ],
     },

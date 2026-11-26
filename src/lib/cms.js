@@ -43,6 +43,7 @@ function normalizePublication(doc) {
     id: doc.id,
     slug: doc.slug,
     title: doc.title,
+    subtitle: doc.subtitle ?? '',
     category: doc.category ?? '',
     section: getPublicationSection(doc.category),
     tags: Array.isArray(doc.tags)
@@ -50,7 +51,14 @@ function normalizePublication(doc) {
       : [],
     date: doc.date ?? null,
     author: doc.author ?? '',
+    authors: Array.isArray(doc.authors)
+      ? doc.authors
+          .map(a => ({ name: a.name ?? '', bio: a.bio ?? '' }))
+          .filter(a => a.name || a.bio)
+      : [],
     excerpt: doc.excerpt ?? '',
+    pdfUrl: doc.pdfUrl ?? '',
+    aiNote: doc.aiNote ?? '',
     image: resolveImageUrl(doc.image),
     content: html,
   }
