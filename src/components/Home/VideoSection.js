@@ -14,11 +14,8 @@ export default function VideoSection() {
     <section className="bg-surface px-gutter py-section-padding-mobile md:py-section-padding-desktop">
       <div className="mx-auto max-w-5xl">
         <div className="mb-stack-lg text-center">
-          <p className="mb-3 font-label-lg text-label-lg uppercase tracking-[0.2em] text-primary">
-            In Our Own Words
-          </p>
           <h2 className="font-headline-lg text-headline-lg-mobile text-on-surface md:text-headline-lg">
-            Watch Our Story
+            From the Founder&apos;s Desk
           </h2>
         </div>
 

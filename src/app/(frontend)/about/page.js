@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import AboutHeroSection from '@/components/About/AboutHeroSection'
+import TimelineSection from '@/components/Home/TimelineSection'
 import AboutContent from '@/components/About/AboutContent'
 import AboutContributions from '@/components/About/AboutContributions'
 import AboutValues from '@/components/About/AboutValues'
@@ -14,6 +15,7 @@ export default function About() {
 
         {/* Hero Section */}
         <AboutHeroSection />
+        <TimelineSection />
         
         {/* Content Section */}
         <AboutContent />
