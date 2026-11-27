@@ -155,9 +155,7 @@ html::-webkit-scrollbar {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
@@ -220,13 +218,14 @@ h3 {
   @apply py-12 md:py-20;
 }
 
-/* Image hover effect */
-img {
-  transition: transform 0.3s ease, filter 0.3s ease;
+::selection {
+  background: #785249;
+  color: #faf9f5;
 }
 
-img:hover {
-  transform: scale(1.02);
+:focus-visible {
+  outline: 2px solid #785249;
+  outline-offset: 4px;
 }
 
 /* Smooth transitions */
@@ -370,9 +369,9 @@ img:hover {
 
 /* ===== Our Approach · Pillars graphic (cpg) ===== */
 .cpg {
-  --cpg-action: #7A1F5C;   /* plum */
-  --cpg-discourse: #2E5E9E; /* blue */
-  --cpg-critical: #B98B2F;  /* ochre */
+  --cpg-action: #785249;   /* Cornelia primary */
+  --cpg-discourse: #42615c; /* Cornelia tertiary */
+  --cpg-critical: #936a60;  /* Cornelia primary container */
   --cpg-ink: #1A1A1A;
   width: 100%;
   max-width: 520px;
@@ -439,6 +438,19 @@ img:hover {
 [data-pillar] { transition: opacity .35s; }
 .cpg-dim { opacity: .4; }
 
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+.animate-accordion-down { animation: accordion-down 0.25s ease-out; }
+.animate-accordion-up { animation: accordion-up 0.25s ease-out; }
+
 /* ===== Partners logo marquee ===== */
 .partners-track {
   display: flex;
@@ -447,4 +459,60 @@ img:hover {
 }
 .partners-track:hover {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .site-loader {
+    display: none;
+  }
+
+  .partners-track {
+    animation-play-state: paused;
+  }
+
+  .animate-accordion-down,
+  .animate-accordion-up {
+    animation: none;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #faf9f5;
+    --foreground: #1b1c1a;
+    --card: #ffffff;
+    --card-foreground: #1b1c1a;
+    --popover: #ffffff;
+    --popover-foreground: #1b1c1a;
+    --primary: #785249;
+    --primary-foreground: #fffaf9;
+    --secondary: #ebe1da;
+    --secondary-foreground: #4c4641;
+    --muted: #efeeea;
+    --muted-foreground: #504441;
+    --accent: #f5f4f0;
+    --accent-foreground: #785249;
+    --destructive: #ba1a1a;
+    --border: #e3e2df;
+    --input: #d5c3be;
+    --ring: #785249;
+    --radius: 0.75rem;
+    --radius-md: 0.75rem;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    @apply font-sans;
+  }
 }

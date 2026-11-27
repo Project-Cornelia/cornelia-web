@@ -147,6 +147,17 @@ export default buildConfig({
           options: ['PDF', 'Video', 'Article', 'Guide', 'Toolkit', 'Other'],
         },
         { name: 'downloadUrl', type: 'text', required: true },
+        {
+          name: 'year',
+          type: 'number',
+          admin: { description: 'Optional release year used to group the toolkit archive.' },
+        },
+        {
+          name: 'cover',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Optional cover image shown when this toolkit is featured.' },
+        },
       ],
     },
     {

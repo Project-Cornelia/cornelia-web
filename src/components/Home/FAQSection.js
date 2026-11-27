@@ -1,6 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import Reveal from '@/components/motion/Reveal'
+import SectionIntro from '@/components/ui/SectionIntro'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
 
 const faqs = [
   {
@@ -9,7 +13,7 @@ const faqs = [
   },
   {
     q: 'Is Cornelia a registered entity?',
-    a: "Yes. Project Cornelia is registered as a trust under the name AINA Foundation, since 27 March 2024. We began in 2021 as a student-run club and grew into an independent organisation before registering.",
+    a: 'Yes. Project Cornelia is registered as a trust under the name AINA Foundation, since 27 March 2024. We began in 2021 as a student-run club and grew into an independent organisation before registering.',
   },
   {
     q: 'Can men be a part of Project Cornelia?',
@@ -26,7 +30,7 @@ const faqs = [
       'public lectures in India and Nepal',
       "a youth fellowship with Delhi's Schools of Specialised Excellence",
       "research on women's political participation",
-      'The Constitution Land, a children\'s book on the Preamble',
+      "The Constitution Land, a children's book on the Preamble",
       'fundraising for acid attack survivors',
     ],
   },
@@ -45,72 +49,66 @@ const faqs = [
 ]
 
 export default function FAQSection() {
-  const [open, setOpen] = useState(0)
+  const [open, setOpen] = useState('0')
 
   return (
-    <section className="py-section-padding-mobile md:py-section-padding-desktop px-gutter bg-surface-container-low">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-12 text-center">
-          Frequently Asked Questions
-        </h2>
+    <section id="faq" data-chapter className="bg-surface px-gutter py-16 md:py-24">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+        <Reveal>
+          <div className="lg:sticky lg:top-36">
+            <SectionIntro eyebrow="Questions, answered" title="Frequently Asked Questions" />
+            <Button asChild variant="link" className="mt-7">
+              <a href="mailto:contact.projectcornelia@gmail.com">
+                Still curious? Write to us <span aria-hidden="true">↗</span>
+              </a>
+            </Button>
+          </div>
+        </Reveal>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => {
-            const isOpen = open === index
-            return (
-              <div
-                key={faq.q}
-                className="rounded-xl border border-neutral-100 bg-surface overflow-hidden"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpen(isOpen ? -1 : index)}
-                  aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-                >
-                  <h3 className="font-headline-sm text-headline-sm text-on-surface">{faq.q}</h3>
-                  <span
-                    className={`shrink-0 text-2xl text-primary leading-none transition-transform duration-300 ${
-                      isOpen ? 'rotate-45' : ''
-                    }`}
-                  >
-                    +
+        <Reveal delay={0.1}>
+          <Accordion
+            type="single"
+            collapsible
+            value={open}
+            onValueChange={setOpen}
+            className="border-t border-primary/15"
+          >
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.q} value={String(index)}>
+                <AccordionTrigger className="gap-5 py-6">
+                  <span className="font-label-md text-[11px] tabular-nums tracking-[0.15em] text-primary/60">
+                    {String(index + 1).padStart(2, '0')}
                   </span>
-                </button>
-
-                {isOpen && (
-                  <div className="px-6 pb-6">
-                    <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                      {faq.a}
-                    </p>
-                    {faq.list && (
-                      <ul className="mt-4 space-y-2 list-disc pl-5">
-                        {faq.list.map((item) => (
-                          <li
-                            key={item}
-                            className="font-body-md text-body-md text-on-surface-variant"
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {faq.link && (
-                      <a
-                        href={faq.link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-4 inline-block font-label-lg text-label-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
-                      >
-                        {faq.link.text}
+                  <span className="flex-1 font-headline-sm text-[1.25rem] font-semibold leading-snug text-on-surface md:text-[1.4rem]">
+                    {faq.q}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="pl-10 pr-4 md:pl-12">
+                  <p className="max-w-2xl font-body-md text-base leading-relaxed text-on-surface-variant">
+                    {faq.a}
+                  </p>
+                  {faq.list && (
+                    <ul className="mt-4 space-y-2">
+                      {faq.list.map((item) => (
+                        <li key={item} className="flex gap-3 font-body-md text-base leading-relaxed text-on-surface-variant">
+                          <span className="mt-[0.65rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {faq.link && (
+                    <Button asChild variant="link" className="mt-5">
+                      <a href={faq.link.href} target="_blank" rel="noopener noreferrer">
+                        {faq.link.text} <span aria-hidden="true">↗</span>
                       </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
+                    </Button>
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </Reveal>
       </div>
     </section>
   )

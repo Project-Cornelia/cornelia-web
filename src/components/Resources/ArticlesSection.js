@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import ArticleList from './ArticleList'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ResourcesFilter from './ResourcesFilter'
-import WriteForUs from '../Publications/WriteForUs'
-import { getTimestamp, getYear } from '@/lib/formatDate'
+import ResourcesGrid from './ResourcesGrid'
+import { Button } from '@/components/ui/button'
+import { formatDate, getTimestamp, getYear } from '@/lib/formatDate'
+import { getArticleHref } from '@/lib/resourceSections'
 
 const ITEMS_PER_PAGE = 3
 
@@ -14,7 +16,6 @@ export default function ArticlesSection({
   title,
   description,
   emptyMessage = 'No articles have been published here yet.',
-  showWriteForUs = false,
 }) {
   const [activeTag, setActiveTag] = useState('All')
   const [activeYear, setActiveYear] = useState('All')
@@ -64,110 +65,102 @@ export default function ArticlesSection({
   const startIndex = (safePage - 1) * ITEMS_PER_PAGE
   const visiblePublications = filteredPublications.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
+  const visibleResources = visiblePublications.map((publication) => {
+    const isResearch = publication.section === 'research-reports'
+    return {
+      ...publication,
+      description: publication.excerpt,
+      cover: publication.image,
+      year: Number(getYear(publication.date)) || null,
+      meta: formatDate(publication.date),
+      type: isResearch ? 'Report' : 'Article',
+      emoji: isResearch ? '📄' : '✍️',
+      href: getArticleHref(publication),
+      external: false,
+      linkLabel: isResearch ? 'Read report' : 'Read article',
+      secondaryHref: isResearch ? publication.pdfUrl : '',
+      secondaryLabel: 'Open PDF',
+    }
+  })
+
+  const selectClass = 'rounded-lg border border-input bg-card px-3 py-2 font-body-sm text-sm text-on-surface outline-none focus:ring-2 focus:ring-ring'
+
   return (
-    <>
-      <section className="max-w-7xl mx-auto px-gutter pt-section-padding-mobile md:pt-section-padding-desktop">
+    <div className="bg-surface">
+      <section className="mx-auto max-w-7xl px-gutter pb-8 pt-16 md:pb-10 md:pt-20">
         <div className="max-w-3xl">
-          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-3">
-            {title}
-          </h2>
-          <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">{description}</p>
+          <p className="mb-4 flex items-center gap-3 font-body-sm text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            <span className="h-px w-8 bg-primary/50" aria-hidden="true" />
+            The resource library
+          </p>
+          <h2 className="font-headline-lg text-headline-lg-mobile text-on-surface md:text-headline-lg">{title}</h2>
+          <p className="mt-4 max-w-2xl font-body-md text-body-md leading-relaxed text-on-surface-variant">
+            {description}
+          </p>
         </div>
       </section>
 
-      <section className="border-y border-neutral-100 mt-stack-lg">
-        <div className="max-w-7xl mx-auto px-gutter py-6">
-          <ResourcesFilter
-            label="Filter by topic"
-            options={tags}
-            value={activeTag}
-            onChange={setActiveTag}
-          />
-
-          <div className="mt-5 flex flex-wrap items-center gap-4">
-            <label className="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
-              Year
-              <select
-                value={activeYear}
-                onChange={(event) => setActiveYear(event.target.value)}
-                className="px-3 py-2 bg-surface border border-neutral-100 rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year === 'All' ? 'All years' : year}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
-              Sort
-              <select
-                value={sortOrder}
-                onChange={(event) => setSortOrder(event.target.value)}
-                className="px-3 py-2 bg-surface border border-neutral-100 rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                <option value="newest">Newest first</option>
-                <option value="oldest">Oldest first</option>
-              </select>
-            </label>
-
-            {!loading && (
-              <span className="font-body-sm text-body-sm text-on-surface-variant">
-                {filteredPublications.length} {filteredPublications.length === 1 ? 'article' : 'articles'}
-              </span>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-gutter py-section-padding-mobile md:py-section-padding-desktop">
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <p className="font-body-md text-on-surface-variant">Loading articles...</p>
-          </div>
-        ) : visiblePublications.length > 0 ? (
-          <>
-            <ArticleList articles={visiblePublications} />
-
-            {totalPages > 1 && (
-              <div className="mt-section-padding-mobile flex justify-center items-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage(Math.max(1, safePage - 1))}
-                  disabled={safePage === 1}
-                  aria-label="Previous page"
-                  className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <span className="font-label-lg text-label-lg">
-                  {safePage} of {totalPages}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage(Math.min(totalPages, safePage + 1))}
-                  disabled={safePage === totalPages}
-                  aria-label="Next page"
-                  className="w-10 h-10 rounded-full border border-neutral-100 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+      {!loading && publications.length > 0 && (
+        <section aria-label={`Filter ${title}`} className="relative z-20 px-gutter md:sticky md:top-24">
+          <div className="mx-auto max-w-7xl rounded-xl border border-primary/15 bg-card/95 p-4 shadow-sm backdrop-blur-md md:p-5">
+            <div className="mb-4 flex items-center justify-between gap-4 border-b border-primary/10 pb-3">
+              <p className="font-body-sm text-xs font-semibold uppercase tracking-[0.18em] text-primary">Filter the library</p>
+              <output aria-live="polite" aria-atomic="true" className="flex shrink-0 items-baseline gap-1.5 text-on-surface-variant">
+                <span className="font-headline-sm text-xl text-primary">{filteredPublications.length}</span>
+                <span className="font-body-sm text-xs">{filteredPublications.length === 1 ? 'article' : 'articles'}</span>
+              </output>
+            </div>
+            <div className="grid min-w-0 gap-4 lg:grid-cols-2 lg:gap-6">
+              <ResourcesFilter label="Topic" options={tags} value={activeTag} onChange={setActiveTag} />
+              <div className="flex flex-wrap items-end gap-3 lg:justify-end">
+                <label className="flex flex-col gap-1.5 font-body-sm text-[11px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
+                  Year
+                  <select value={activeYear} onChange={(event) => setActiveYear(event.target.value)} className={selectClass}>
+                    {years.map((year) => (
+                      <option key={year} value={year}>{year === 'All' ? 'All years' : year}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="flex flex-col gap-1.5 font-body-sm text-[11px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
+                  Sort
+                  <select value={sortOrder} onChange={(event) => setSortOrder(event.target.value)} className={selectClass}>
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                  </select>
+                </label>
               </div>
-            )}
-          </>
-        ) : (
-          <div className="py-16 text-center">
-            <p className="font-body-md text-body-md text-on-surface-variant">{emptyMessage}</p>
+            </div>
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
-      {/* {showWriteForUs && <WriteForUs />} */}
-    </>
+      <ResourcesGrid loading={loading} filteredResources={visibleResources} emptyMessage={emptyMessage} />
+
+      {!loading && totalPages > 1 && (
+        <div className="mx-auto -mt-8 flex max-w-7xl items-center justify-center gap-4 px-gutter pb-16 md:pb-24">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon-sm"
+            onClick={() => setCurrentPage(Math.max(1, safePage - 1))}
+            disabled={safePage === 1}
+            aria-label="Previous page"
+          >
+            <ChevronLeft />
+          </Button>
+          <span className="font-label-lg text-label-lg">{safePage} of {totalPages}</span>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon-sm"
+            onClick={() => setCurrentPage(Math.min(totalPages, safePage + 1))}
+            disabled={safePage === totalPages}
+            aria-label="Next page"
+          >
+            <ChevronRight />
+          </Button>
+        </div>
+      )}
+    </div>
   )
 }

@@ -1,6 +1,8 @@
 'use client'
 
-import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
+import ParallaxImage from '@/components/motion/ParallaxImage'
+import SectionIntro from '@/components/ui/SectionIntro'
 
 const paragraphs = [
   "Project Cornelia takes its name from Cornelia Sorabji, a woman who refused to accept the boundaries drawn around her. She became the first woman to study law at Oxford and one of India's first women lawyers, at a time when women were largely shut out of legal and public life.",
@@ -9,35 +11,36 @@ const paragraphs = [
 
 export default function CorneliaStorySection() {
   return (
-    <section className="py-section-padding-mobile md:py-section-padding-desktop px-gutter bg-surface">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-neutral-100">
-          <Image
+    <section id="cornelia" data-chapter className="bg-surface px-gutter py-16 md:py-24">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
+        <Reveal className="relative" y={36}>
+          <div className="absolute -left-3 -top-3 h-24 w-24 rounded-tl-[2rem] border-l border-t border-primary/30" aria-hidden="true" />
+          <ParallaxImage
             src="https://res.cloudinary.com/vbi4em8b/image/upload/v1795744983/Screenshot_From_2026-11-27_07-47-40_a9kbyi.png"
-            alt="Why we are called Cornelia"
-            fill
-            className="object-cover"
+            alt="Cornelia Sorabji, the inspiration behind Project Cornelia’s name"
+            className="aspect-[4/3] rounded-[1.75rem] bg-surface-container shadow-soft"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
-        </div>
+          <div className="absolute -bottom-5 right-5 rounded-2xl bg-primary px-5 py-4 text-white shadow-lift md:right-8">
+            <p className="font-label-lg text-[10px] uppercase tracking-[0.2em] text-white/60">Our namesake</p>
+            <p className="mt-1 font-headline-sm text-xl">Cornelia Sorabji</p>
+          </div>
+        </Reveal>
 
-        <div>
-          <p className="mb-3 font-label-lg text-label-lg uppercase tracking-[0.2em] text-primary">
-            Our Name
-          </p>
-          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-6">
-            Why are we called Cornelia
-          </h2>
-          <div className="mt-6 space-y-5">
-            {paragraphs.map((paragraph, index) => (
-              <p
-                key={index}
-                className="font-body-md text-body-md leading-relaxed text-on-surface-variant"
-              >
+        <Reveal delay={0.12}>
+          <SectionIntro
+            chapter="04"
+            eyebrow="Our name"
+            title="Why are we called Cornelia?"
+          />
+          <div className="mt-7 space-y-5 border-l border-primary/20 pl-6">
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph} className="font-body-md text-base leading-[1.8] text-on-surface-variant md:text-lg">
                 {paragraph}
               </p>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

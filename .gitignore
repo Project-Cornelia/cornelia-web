@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+playwright-output
+playwright-report
+test-results
 /.pnp
 .pnp.js
 

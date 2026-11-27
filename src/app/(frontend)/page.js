@@ -7,12 +7,14 @@ import CorneliaStorySection from '@/components/Home/CorneliaStorySection'
 import VideoSection from '@/components/Home/VideoSection'
 import FAQSection from '@/components/Home/FAQSection'
 import Footer from '@/components/Footer'
+import JourneyProgress from '@/components/motion/JourneyProgress'
 
 export default function Home() {
   return (
     <>
       <Header />
       <main className="bg-surface overflow-x-hidden">
+        <JourneyProgress />
         <HeroSection />
         <ImpactNumbersSection />
         <OurApproachSection />

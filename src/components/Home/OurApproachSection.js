@@ -1,24 +1,30 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import Reveal from '@/components/motion/Reveal'
+import { Stagger, StaggerItem } from '@/components/motion/Stagger'
+import SectionIntro from '@/components/ui/SectionIntro'
 
 const PILLAR_KEYS = ['action', 'discourse', 'critical']
 
 const pillars = [
   {
     key: 'action',
+    number: '01',
     title: 'Collective Action',
     description: 'Change isn’t achieved alone. We collaborate so every woman’s voice is heard.',
     ariaLabel: "Collective Action: change isn't achieved alone",
   },
   {
     key: 'discourse',
+    number: '02',
     title: 'Conversational Discourse',
     description: 'Dialogue is how awareness spreads. We put conversation at the center of our mission.',
     ariaLabel: 'Conversational Discourse: dialogue is how awareness spreads',
   },
   {
     key: 'critical',
+    number: '03',
     title: 'Critical Outlook',
     description: 'Questioning builds a just society. We learn to challenge the world around us, together.',
     ariaLabel: 'Critical Outlook: questioning builds a just society',
@@ -78,108 +84,102 @@ const PILLAR_SVG = {
 }
 
 export default function OurApproachSection() {
-  const containerRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
   const [hovered, setHovered] = useState(null)
   const [locked, setLocked] = useState(null)
-
   const activeKey = locked ?? hovered
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true)
-      },
-      { threshold: 0.1 }
-    )
-    if (containerRef.current) observer.observe(containerRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  // Render the active pillar last so it paints on top, mirroring the
-  // original SVG insertBefore(centre) behaviour.
+  // Paint the active pillar last, preserving the original stacking behaviour.
   const ordered = activeKey
     ? [...PILLAR_KEYS.filter((key) => key !== activeKey), activeKey]
     : PILLAR_KEYS
 
   return (
-    <section className="py-section-padding-desktop bg-surface-container-low px-gutter">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-        {/* Pillars graphic */}
-        <div
-          className={`relative flex items-center justify-center reveal ${isVisible ? 'visible' : ''}`}
-          ref={containerRef}
-        >
-          <div
-            className={`cpg ${activeKey ? 'has-active' : ''}`}
-            role="group"
-            aria-label="Our approach: Collective Action, Conversational Discourse, Critical Outlook"
-          >
-            <svg viewBox="0 0 400 400" aria-hidden="false">
-              <circle className="orbit" cx="200" cy="200" r="178" />
-              <circle className="orbit o2" cx="200" cy="200" r="190" />
-              <circle className="spark" cx="200" cy="22" r="3" />
-              <circle className="spark s2" cx="200" cy="10" r="2" />
+    <section id="approach" data-chapter className="overflow-hidden bg-surface-container-low px-gutter py-16 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <Reveal>
+          <SectionIntro
+            eyebrow="How we work"
+            title="Our Approach"
+            className="max-w-3xl"
+          />
+        </Reveal>
 
-              {ordered.map((key) => {
-                const pillar = pillars.find((p) => p.key === key)
-                return (
-                  <g
-                    key={key}
-                    className={`pillar ${activeKey === key ? 'active' : ''}`}
-                    data-key={key}
-                    tabIndex={0}
-                    role="button"
-                    aria-pressed={activeKey === key}
-                    aria-label={pillar.ariaLabel}
-                    onMouseEnter={() => {
-                      if (!locked) setHovered(key)
-                    }}
-                    onMouseLeave={() => {
-                      if (!locked) setHovered(null)
-                    }}
-                    onClick={() => {
-                      setLocked(locked === key ? null : key)
-                      setHovered(null)
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
+        <div className="mt-10 grid items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
+          <Reveal className="relative flex items-center justify-center" y={32}>
+            <div className="absolute inset-8 rounded-full bg-white/40 blur-3xl" aria-hidden="true" />
+            <div
+              className={`cpg ${activeKey ? 'has-active' : ''}`}
+              role="group"
+              aria-label="Our approach: Collective Action, Conversational Discourse, Critical Outlook"
+            >
+              <svg viewBox="0 0 400 400" aria-hidden="false">
+                <circle className="orbit" cx="200" cy="200" r="178" />
+                <circle className="orbit o2" cx="200" cy="200" r="190" />
+                <circle className="spark" cx="200" cy="22" r="3" />
+                <circle className="spark s2" cx="200" cy="10" r="2" />
+
+                {ordered.map((key) => {
+                  const pillar = pillars.find((item) => item.key === key)
+                  return (
+                    <g
+                      key={key}
+                      className={`pillar ${activeKey === key ? 'active' : ''}`}
+                      data-key={key}
+                      tabIndex={0}
+                      role="button"
+                      aria-pressed={activeKey === key}
+                      aria-label={pillar.ariaLabel}
+                      onMouseEnter={() => { if (!locked) setHovered(key) }}
+                      onMouseLeave={() => { if (!locked) setHovered(null) }}
+                      onFocus={() => { if (!locked) setHovered(key) }}
+                      onBlur={() => { if (!locked) setHovered(null) }}
+                      onClick={() => {
                         setLocked(locked === key ? null : key)
                         setHovered(null)
-                      }
-                    }}
-                  >
-                    {PILLAR_SVG[key]}
-                  </g>
-                )
-              })}
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault()
+                          setLocked(locked === key ? null : key)
+                          setHovered(null)
+                        }
+                      }}
+                    >
+                      {PILLAR_SVG[key]}
+                    </g>
+                  )
+                })}
 
-              <circle className="centre" cx="200" cy="212" r="5" />
-              <text className="hint" x="200" y="392">Hover or tap a circle</text>
-            </svg>
-          </div>
-        </div>
+                <circle className="centre" cx="200" cy="212" r="5" />
+                <text className="hint" x="200" y="392">Hover or tap a circle</text>
+              </svg>
+            </div>
+          </Reveal>
 
-        {/* Content */}
-        <div className={`space-y-12 reveal ${isVisible ? 'visible' : ''}`}>
-          <h2 className="font-display-lg text-display-lg text-on-surface">Our Approach</h2>
-          <div className="space-y-8">
+          <Stagger className="border-t border-primary/20" delay={0.08}>
             {pillars.map((pillar) => (
-              <div
-                key={pillar.key}
-                data-pillar={pillar.key}
-                className={activeKey && activeKey !== pillar.key ? 'cpg-dim' : ''}
-              >
-                <h3 className="font-headline-sm text-headline-sm text-on-surface mb-2">
-                  {pillar.title}
-                </h3>
-                <p className="font-body-md text-body-md text-on-surface-variant">
-                  {pillar.description}
-                </p>
-              </div>
+              <StaggerItem key={pillar.key} y={18}>
+                <div
+                  data-pillar={pillar.key}
+                  className={`grid grid-cols-[2rem_1fr] gap-4 border-b border-primary/20 py-6 ${
+                    activeKey && activeKey !== pillar.key ? 'cpg-dim' : ''
+                  }`}
+                >
+                  <span className="pt-1 font-label-md text-[11px] tracking-[0.16em] text-primary/60">
+                    {pillar.number}
+                  </span>
+                  <div>
+                    <h3 className="font-headline-sm text-[1.55rem] leading-tight text-on-surface">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-2 font-body-md text-base leading-relaxed text-on-surface-variant">
+                      {pillar.description}
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </div>
     </section>

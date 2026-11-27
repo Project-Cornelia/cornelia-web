@@ -72,6 +72,8 @@ function normalizeResource(doc) {
     emoji: doc.emoji ?? doc.icon ?? null,
     category: doc.category ?? '',
     type: doc.type ?? '',
+    year: doc.year ?? null,
+    cover: resolveImageUrl(doc.cover),
     downloadUrl: doc.downloadUrl ?? '#',
   }
 }
