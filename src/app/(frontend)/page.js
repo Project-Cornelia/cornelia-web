@@ -1,9 +1,11 @@
 import Header from '@/components/Header'
 import HeroSection from '@/components/Home/HeroSection'
-import TimelineSection from '@/components/Home/TimelineSection'
-import ThreePillarsSection from '@/components/Home/ThreePillarsSection'
+import ImpactNumbersSection from '@/components/Home/ImpactNumbersSection'
+import OurApproachSection from '@/components/Home/OurApproachSection'
+import PartnersSection from '@/components/Home/PartnersSection'
+import CorneliaStorySection from '@/components/Home/CorneliaStorySection'
 import VideoSection from '@/components/Home/VideoSection'
-import NameAndPoliticsSection from '@/components/Home/NameAndPoliticsSection'
+import FAQSection from '@/components/Home/FAQSection'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -12,10 +14,12 @@ export default function Home() {
       <Header />
       <main className="bg-surface overflow-x-hidden">
         <HeroSection />
-        <TimelineSection />
-        <ThreePillarsSection />
+        <ImpactNumbersSection />
+        <OurApproachSection />
+        <PartnersSection />
+        <CorneliaStorySection />
         <VideoSection />
-        <NameAndPoliticsSection />
+        <FAQSection />
       </main>
       <Footer />
     </>
